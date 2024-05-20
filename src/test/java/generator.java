@@ -9,12 +9,12 @@ import java.util.Collections;
 public class generator {
     public static void main(String[] args) {
 
-        FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/test1", "root", "")
+        FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/database_pj", "root", "0301zhz")
                 .globalConfig(builder -> {
                     builder.author("hzz") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式
                             //.fileOverride() // 覆盖已生成文件
-                            .outputDir(""); // 指定输出目录
+                            .outputDir("src/main/java"); // 指定输出目录
                 })
                 .dataSourceConfig(builder -> builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {
                     int typeCode = metaInfo.getJdbcType().TYPE_CODE;
@@ -28,10 +28,10 @@ public class generator {
                 .packageConfig(builder -> {
                     builder.parent("org.example") // 设置父包名
                             .moduleName("springboot") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.xml, "")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, "src/main/resources/mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("") // 设置需要生成的表名
+                    builder.addInclude("root") // 设置需要生成的表名
                             .addTablePrefix(""); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
