@@ -9,26 +9,16 @@ import java.io.Serializable;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
 @TableName("food_type")
 public class FoodType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String catererId;
-
     private String foodId;
 
     private String type;
-
-    public String getCatererId() {
-        return catererId;
-    }
-
-    public void setCatererId(String catererId) {
-        this.catererId = catererId;
-    }
 
     public String getFoodId() {
         return foodId;
@@ -49,8 +39,7 @@ public class FoodType implements Serializable {
     @Override
     public String toString() {
         return "FoodType{" +
-            "catererId = " + catererId +
-            ", foodId = " + foodId +
+            "foodId = " + foodId +
             ", type = " + type +
         "}";
     }

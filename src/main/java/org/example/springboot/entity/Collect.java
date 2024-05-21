@@ -9,7 +9,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
 @TableName("collect")
 public class Collect implements Serializable {
@@ -17,8 +17,6 @@ public class Collect implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String userId;
-
-    private String catererId;
 
     private String foodId;
 
@@ -28,14 +26,6 @@ public class Collect implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getCatererId() {
-        return catererId;
-    }
-
-    public void setCatererId(String catererId) {
-        this.catererId = catererId;
     }
 
     public String getFoodId() {
@@ -50,7 +40,6 @@ public class Collect implements Serializable {
     public String toString() {
         return "Collect{" +
             "userId = " + userId +
-            ", catererId = " + catererId +
             ", foodId = " + foodId +
         "}";
     }

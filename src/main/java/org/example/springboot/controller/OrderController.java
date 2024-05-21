@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
 @Controller
-@RequestMapping("/springboot/orders")
-public class OrdersController {
+@RequestMapping("/springboot/order")
+public class OrderController {
 
 }

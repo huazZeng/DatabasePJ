@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
 @TableName("book")
 public class Book implements Serializable {

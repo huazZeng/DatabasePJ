@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
 @TableName("food")
 public class Food implements Serializable {
@@ -18,6 +18,8 @@ public class Food implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String id;
+
+    private String catererId;
 
     private String name;
 
@@ -31,6 +33,14 @@ public class Food implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCatererId() {
+        return catererId;
+    }
+
+    public void setCatererId(String catererId) {
+        this.catererId = catererId;
     }
 
     public String getName() {
@@ -61,6 +71,7 @@ public class Food implements Serializable {
     public String toString() {
         return "Food{" +
             "id = " + id +
+            ", catererId = " + catererId +
             ", name = " + name +
             ", price = " + price +
             ", description = " + description +

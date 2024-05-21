@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
 @Service
 public class FoodTypeServiceImpl extends ServiceImpl<FoodTypeMapper, FoodType> implements IFoodTypeService {

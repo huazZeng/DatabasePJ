@@ -1,6 +1,6 @@
 package org.example.springboot.service;
 
-import org.example.springboot.entity.Orders;
+import org.example.springboot.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
-public interface IOrdersService extends IService<Orders> {
+public interface IOrderService extends IService<Order> {
 
 }

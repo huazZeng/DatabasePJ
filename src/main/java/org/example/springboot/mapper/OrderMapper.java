@@ -1,6 +1,6 @@
 package org.example.springboot.mapper;
 
-import org.example.springboot.entity.Orders;
+import org.example.springboot.entity.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author hzz
- * @since 2024-05-20
+ * @since 2024-05-21
  */
-public interface OrdersMapper extends BaseMapper<Orders> {
+public interface OrderMapper extends BaseMapper<Order> {
 
 }
