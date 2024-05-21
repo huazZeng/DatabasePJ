@@ -1,1 +1,21 @@
-id,name,price,description
+id;caterer_id;name;price;description
+1;1;Grilled Chicken Salad;8.99;A healthy salad with grilled chicken, fresh greens, and a light vinaigrette.
+2;1;Beef Burger;7.49;A juicy beef burger with lettuce, tomato, and cheese on a sesame seed bun.
+3;2;Vegetarian Wrap;6.99;A wrap filled with fresh vegetables, hummus, and a tangy dressing.
+4;2;Quinoa Salad;7.49;A nutritious salad with quinoa, black beans, corn, and a cilantro lime dressing.
+5;3;Spaghetti Bolognese;9.99;Traditional Italian pasta with a rich meat sauce.
+6;3;Chicken Alfredo;10.49;Creamy Alfredo pasta with grilled chicken and Parmesan cheese.
+7;4;BBQ Pulled Pork Sandwich;8.49;Slow-cooked pulled pork with BBQ sauce on a soft bun.
+8;4;Mac and Cheese;5.99;Classic macaroni and cheese with a crispy breadcrumb topping.
+9;5;Grilled Veggie Platter;8.99;A variety of grilled vegetables served with a side of rice.
+10;5;Stuffed Peppers;9.49;Bell peppers stuffed with quinoa, black beans, and vegetables.
+11;6;Fruit Smoothie;4.99;A refreshing smoothie made with a blend of fresh fruits.
+12;6;Turkey Sandwich;6.49;A hearty sandwich with sliced turkey, lettuce, and tomato on whole grain bread.
+13;7;Nachos;7.99;Crunchy nachos topped with cheese, jalapenos, and salsa.
+14;7;French Fries;3.49;Classic crispy French fries served with ketchup.
+15;8;Gourmet Cheese Platter;12.99;An assortment of gourmet cheeses with crackers and fruit.
+16;8;Baked Brie;11.49;Soft brie cheese baked to perfection, served with a side of bread.
+17;9;Tacos;7.49;Soft tacos filled with your choice of meat, topped with lettuce, cheese, and salsa.
+18;9;Chicken Quesadilla;8.49;A grilled quesadilla stuffed with cheese and chicken.
+19;10;BLT Sandwich;6.99;A classic BLT sandwich with bacon, lettuce, and tomato on toasted bread.
+20;10;Chicken Caesar Salad;7.99;Fresh romaine lettuce topped with grilled chicken, croutons, and Caesar dressing.
