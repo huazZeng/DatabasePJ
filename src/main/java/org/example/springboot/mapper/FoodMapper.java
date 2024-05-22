@@ -1,7 +1,10 @@
 package org.example.springboot.mapper;
 
+import org.apache.ibatis.annotations.Select;
 import org.example.springboot.entity.Food;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +15,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-05-21
  */
 public interface FoodMapper extends BaseMapper<Food> {
-
+    @Select("SELECT * FROM food WHERE caterer_id = #{caterer_id}")
+    List<Food> selectFoodsByCaterterId(String caterer_id);
 }

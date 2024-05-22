@@ -1,7 +1,14 @@
 package org.example.springboot.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.example.springboot.entity.Caterer;
+import org.example.springboot.entity.Food;
+import org.example.springboot.entity.Order;
+import org.example.springboot.service.IFoodService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 /**
  * <p>
@@ -11,8 +18,14 @@ import org.springframework.stereotype.Controller;
  * @author hzz
  * @since 2024-05-21
  */
-@Controller
+@RestController
 @RequestMapping("/springboot/food")
 public class FoodController {
+    @Autowired
+    IFoodService iFoodService;
+    @GetMapping("/menu/{cId}")
+    public List<Food> getUserOrders(@PathVariable("cId") String cID) {
 
+        return iFoodService.selectFoodsByCaterterId(cID);
+    }
 }

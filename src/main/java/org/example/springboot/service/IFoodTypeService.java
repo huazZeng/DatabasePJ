@@ -1,7 +1,11 @@
 package org.example.springboot.service;
 
+import org.apache.ibatis.annotations.Param;
+import org.example.springboot.entity.Food;
 import org.example.springboot.entity.FoodType;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
