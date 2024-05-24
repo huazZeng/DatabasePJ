@@ -1,11 +1,13 @@
 package org.example.springboot.controller;
 
+import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
 import org.example.springboot.entity.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.example.springboot.service.ICatererService;
+import org.example.springboot.service.IFoodService;
+import org.example.springboot.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -18,8 +20,14 @@ import java.util.List;
  * @author hzz
  * @since 2024-05-21
  */
-@Controller
+@RestController
 @RequestMapping("/springboot/caterer")
 public class CatererController {
-
+    @Autowired
+    ICatererService iService;
+    @GetMapping("/all")
+    public List<Caterer> findall(){
+        System.out.println('1');
+        return  iService.list();
+    }
 }
