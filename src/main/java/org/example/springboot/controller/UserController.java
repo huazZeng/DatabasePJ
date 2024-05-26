@@ -2,6 +2,7 @@ package org.example.springboot.controller;
 import org.apache.ibatis.mapping.FetchType;
 import org.example.springboot.entity.User;
 import org.example.springboot.service.IUserService;
+import org.example.springboot.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,15 @@ public class UserController {
     public List<User> findall(){
         System.out.println('1');
         return  iUserService.list();
+    }
+
+    @GetMapping("/{id}")
+    public JsonResult<User> getUserById(@PathVariable Long id) {
+        User user = iUserService.getUserById(id);
+        if (user == null) {
+            return new JsonResult<>(404, "User not found");
+        }
+        return new JsonResult<>(200, user);
     }
 
 
