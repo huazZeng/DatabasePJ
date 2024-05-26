@@ -31,7 +31,7 @@ public class UserController {
         return  iUserService.list();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//1.a
     public JsonResult<User> getUserById(@PathVariable Long id) {
         User user = iUserService.getUserById(id);
         if (user == null) {

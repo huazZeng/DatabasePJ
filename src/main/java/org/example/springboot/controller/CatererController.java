@@ -30,4 +30,16 @@ public class CatererController {
         System.out.println('1');
         return  iService.list();
     }
+
+//    @GetMapping("/findByName")//2.c第一种实现
+//    public Caterer findCatererByName(@RequestParam String name) {
+//        return iService.findCaterByName(name);
+//    }
+
+    @GetMapping("/findBySearch")//2.a&b 这样返回的是全部内容。2个选择：1创建DTO对象 2前端选择性展示
+    public List<Caterer> findCaterBySearch(@RequestParam String search){return iService.findCaterBySearch(search);}
+
+    @GetMapping("/findById")//2.c
+    public Caterer findCaterById(@RequestParam int id){return iService.findCaterById(id);}
+
 }
