@@ -30,14 +30,9 @@ public class UserController {
         return  userService.list();
     }
 
-//    @GetMapping("/{id}")//1.a
-//    public JsonResult<User> getUserById(@PathVariable Long id) {
-//        User user = UserService.getUserById(id);
-//        if (user == null) {
-//            return new JsonResult<>(404, "User not found");
-//        }
-//        return new JsonResult<>(200, user);
-//    }
-
+    @GetMapping("/{id}")//1.a
+    public User getUserById(@PathVariable int id){
+        return userService.getUserById(id);
+    }
 
 }
