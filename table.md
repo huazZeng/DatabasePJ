@@ -47,6 +47,9 @@
 
 food_id食物的id，type对应的食物的种类
 
+
+
+
 ## order
 * id
 * time
@@ -89,8 +92,8 @@ food_id食物的id，type对应的食物的种类
 主键与外键引用关系可见下
 ## Create语句
 CREATE TABLE user (
-id VARCHAR(32) PRIMARY KEY NOT NULL,
-name VARCHAR(255) NOT NULL,
+id INT PRIMARY KEY NOT NULL,
+name VARCHAR(32) NOT NULL,
 is_student BOOLEAN NOT NULL,
 password VARCHAR(32) NOT NULL,
 s_id VARCHAR(32) NOT NULL,
@@ -99,63 +102,66 @@ gender CHAR(1)
 );
 
 CREATE TABLE caterer (
-id VARCHAR(32) PRIMARY KEY NOT NULL,
-name VARCHAR(255) NOT NULL,
+id INT PRIMARY KEY NOT NULL,
+name VARCHAR(32) NOT NULL,
 password VARCHAR(32) NOT NULL,
-address VARCHAR(255)
+address VARCHAR(255),
+main_food_id INT NOT NULL,
+FOREIGN KEY (main_food_id) REFERENCES food(id),
 );
 
 CREATE TABLE food (
-id VARCHAR(32) PRIMARY KEY NOT NULL,
-caterer_id VARCHAR(32) references caterer(id),
+id INT PRIMARY KEY NOT NULL,
+caterer_id INT references caterer(id),
 name VARCHAR(255) NOT NULL,
 price DECIMAL(10, 2) NOT NULL,
-description TEXT
+description TEXT,
+image_path VARCHAR(255) NOT NULL,
+ingredient VARCHAR(255) NOT NULL,
+nutrition VARCHAR(255) NOT NULL,
+allergen VARCHAR(255),
+type VARCHAR(32)
 );
 
 CREATE TABLE book (
-id VARCHAR(32) PRIMARY KEY NOT NULL,
-user_id VARCHAR(32) NOT NULL,
-caterer_id VARCHAR(32) NOT NULL,
+id INT PRIMARY KEY NOT NULL,
+user_id INT NOT NULL,
+caterer_id INT NOT NULL,
 time DATETIME NOT NULL,
 FOREIGN KEY (user_id) REFERENCES user(id),
 FOREIGN KEY (caterer_id) REFERENCES caterer(id)
 );
 
 CREATE TABLE collect (
-user_id VARCHAR(32) NOT NULL,
-food_id VARCHAR(32) NOT NULL,
+user_id INT NOT NULL,
+food_id INT NOT NULL,
 PRIMARY KEY (user_id, food_id),
 FOREIGN KEY (user_id) REFERENCES user(id),
 FOREIGN KEY (food_id) REFERENCES food(id)
 );
 
-CREATE TABLE food_type (
-food_id VARCHAR(32) NOT NULL,
-type VARCHAR(255),
-PRIMARY KEY ( food_id, type),
-FOREIGN KEY (food_id) REFERENCES food(id)
-);
 
-CREATE TABLE order(
-id VARCHAR(32) PRIMARY KEY NOT NULL,
+CREATE TABLE orders(
+id INT PRIMARY KEY NOT NULL,
 time DATETIME NOT NULL,
-user_id VARCHAR(32) NOT NULL,
-caterer_id VARCHAR(32) NOT NULL,
+user_id INT NOT NULL,
+caterer_id INT NOT NULL,
+is_queue_order BOOLEAN NOT NULL,
+is_finished BOOLEAN NOT NULL DEFAULT FALSE,
 FOREIGN KEY (user_id) REFERENCES user(id),
 FOREIGN KEY (caterer_id) REFERENCES caterer(id)
 );
 
 CREATE TABLE order_food (
-order_id VARCHAR(32) NOT NULL,
-food_id VARCHAR(32) NOT NULL,
+order_id INT NOT NULL,
+food_id INT NOT NULL,
 PRIMARY KEY (order_id, food_id),
 FOREIGN KEY (order_id) REFERENCES orders(id),
 FOREIGN KEY (food_id) REFERENCES food(id)
 );
 
 CREATE TABLE price (
-food_id VARCHAR(32) NOT NULL,
+food_id INT NOT NULL,
 time DATETIME NOT NULL,
 price DECIMAL(10, 2) NOT NULL,
 PRIMARY KEY (food_id, time),
@@ -163,6 +169,85 @@ FOREIGN KEY (food_id) REFERENCES food(id)
 );
 
 CREATE TABLE root (
-id VARCHAR(32) PRIMARY KEY NOT NULL,
+id INT PRIMARY KEY NOT NULL,
+name VARCHAR(32) NOT NULL,
 password VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE cater_comment(
+caterer_id INT NOT NULL,
+user_id INT NOT NULL,
+comment TEXT,
+grade INT,
+FOREIGN KEY (caterer_id) REFERENCES caterer(id),
+FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE food_comment(
+food_id INT NOT NULL,
+user_id INT NOT NULL,
+comment TEXT,
+grade INT,
+FOREIGN KEY (food_id) REFERENCES food(id),
+FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+CREATE TABLE messages (
+message_id INT AUTO_INCREMENT PRIMARY KEY,
+user_id INT NOT NULL,
+caterer_id INT NOT NULL,
+message_content TEXT NOT NULL,
+sent_time DATETIME NOT NULL,
+FOREIGN KEY (user_id) REFERENCES user(id),
+FOREIGN KEY (caterer_id) REFERENCES caterer(id)
+);
+
+
+DELIMITER $$
+CREATE TRIGGER insert_order_message AFTER INSERT ON orders
+FOR EACH ROW
+BEGIN
+DECLARE user_name VARCHAR(255);
+DECLARE caterer_name VARCHAR(255);
+
+    -- 获取用户名称
+    SELECT name INTO user_name FROM user WHERE id = NEW.user_id;
+
+    -- 获取餐厅名称
+    SELECT name INTO caterer_name FROM caterer WHERE id = NEW.caterer_id;
+
+    -- 构造消息内容
+    SET @message_content = CONCAT('User ', user_name, ' placed an order with caterer ', caterer_name);
+
+    -- 插入消息记录
+    INSERT INTO messages (user_id, caterer_id, message_content, sent_time)
+    VALUES (NEW.user_id, NEW.caterer_id, @message_content, NOW());
+END;
+$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER order_finished_message AFTER UPDATE ON orders
+FOR EACH ROW
+BEGIN
+IF OLD.is_finished = 0 AND NEW.is_finished = 1 THEN
+DECLARE user_name VARCHAR(255);
+DECLARE caterer_name VARCHAR(255);
+
+        -- 获取用户名称
+        SELECT name INTO user_name FROM user WHERE id = NEW.user_id;
+
+        -- 获取餐厅名称
+        SELECT name INTO caterer_name FROM caterer WHERE id = NEW.caterer_id;
+
+        -- 构造消息内容
+        SET @message_content = CONCAT('Order for user ', user_name, ' with caterer ', caterer_name, ' is now finished.');
+
+        -- 插入消息记录
+        INSERT INTO messages (user_id, caterer_id, message_content, sent_time)
+        VALUES (NEW.user_id, NEW.caterer_id, @message_content, NOW());
+    END IF;
+END;
+$$
+DELIMITER ;

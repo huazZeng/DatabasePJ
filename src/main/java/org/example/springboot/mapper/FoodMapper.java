@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface FoodMapper extends BaseMapper<Food> {
     @Select("SELECT * FROM food WHERE caterer_id = #{caterer_id}")
-    List<Food> selectFoodsByCaterterId(String caterer_id);
+    List<Food> selectFoodsByCaterterId(int caterer_id);
 }

@@ -39,7 +39,7 @@ public class CatererController {
     @GetMapping("/findBySearch")//2.a&b 这样返回的是全部内容。2个选择：1创建DTO对象 2前端选择性展示
     public List<Caterer> findCaterBySearch(@RequestParam String search){return iService.findCaterBySearch(search);}
 
-    @GetMapping("/findById")//2.c
+    @GetMapping("/findById")//2.c 3.a查询一个商户的所有信息，包括菜单、菜品概要等,1创建DTO对象 2一个页面同时发送两个请求请求cater信息同时请求对应的菜品
     public Caterer findCaterById(@RequestParam int id){return iService.findCaterById(id);}
 
 }

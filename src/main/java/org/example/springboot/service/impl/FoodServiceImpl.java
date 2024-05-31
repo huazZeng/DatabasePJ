@@ -26,8 +26,13 @@ public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements IF
     public FoodServiceImpl(FoodMapper Mapper) {
         this.Mapper = Mapper;
     }
+//    @Override
+//    public List<Food> selectFoodsByCaterterId(String caterer_id) {
+//        return Mapper.selectFoodsByCaterterId(caterer_id);
+//    }
+
     @Override
-    public List<Food> selectFoodsByCaterterId(String caterer_id) {
-        return Mapper.selectFoodsByCaterterId(caterer_id);
+    public List<Food> selectFoodsByCaterId(int caterId) {
+        return Mapper.selectFoodsByCaterterId(caterId);
     }
 }

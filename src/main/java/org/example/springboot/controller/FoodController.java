@@ -24,8 +24,14 @@ public class FoodController {
     @Autowired
     IFoodService iFoodService;
     @GetMapping("/menu/{cId}")
-    public List<Food> getUserOrders(@PathVariable("cId") String cID) {
+    public List<Food> getUserOrders(@PathVariable("cId") int cID) {
 
-        return iFoodService.selectFoodsByCaterterId(cID);
+        return iFoodService.selectFoodsByCaterId(cID);
     }
+
+    @GetMapping("/findByCaterId")
+    public List<Food> findFoodByCaterId(@RequestParam int CaterId ){return iFoodService.selectFoodsByCaterId(CaterId);}
+
+//    @GetMapping("/findByCaterId")
+//    public List<Food> findFoodByCaterId(){return iFoodService.selectFoodsByCaterterId()}
 }

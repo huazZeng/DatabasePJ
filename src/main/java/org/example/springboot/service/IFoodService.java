@@ -15,5 +15,5 @@ import java.util.List;
  * @since 2024-05-21
  */
 public interface IFoodService extends IService<Food> {
-    List<Food> selectFoodsByCaterterId(@Param("caterterid") String caterterid);
+    List<Food> selectFoodsByCaterId(int caterId);
 }
