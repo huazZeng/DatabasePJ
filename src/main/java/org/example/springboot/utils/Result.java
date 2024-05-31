@@ -1,4 +1,4 @@
-package org.example.Common;
+package org.example.springboot.utils;
 
 import lombok.Data;
 
