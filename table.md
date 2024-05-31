@@ -174,7 +174,7 @@ name VARCHAR(32) NOT NULL,
 password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE cater_comment(
+CREATE TABLE caterer_comment(
 caterer_id INT NOT NULL,
 user_id INT NOT NULL,
 comment TEXT,

@@ -1,6 +1,6 @@
 package org.example.springboot.mapper;
 
-import org.example.springboot.entity.User;
+import org.example.springboot.entity.FoodComment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author hzz
  * @since 2024-05-31
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface FoodCommentMapper extends BaseMapper<FoodComment> {
 
 }

@@ -2,6 +2,8 @@ package org.example.springboot.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -9,38 +11,18 @@ import java.io.Serializable;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
+@Getter
+@Setter
 @TableName("root")
 public class Root implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Integer id;
+
+    private String name;
 
     private String password;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "Root{" +
-            "id = " + id +
-            ", password = " + password +
-        "}";
-    }
 }

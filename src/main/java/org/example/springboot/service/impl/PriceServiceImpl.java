@@ -2,7 +2,7 @@ package org.example.springboot.service.impl;
 
 import org.example.springboot.entity.Price;
 import org.example.springboot.mapper.PriceMapper;
-import org.example.springboot.service.IPriceService;
+import org.example.springboot.service.PriceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
 @Service
-public class PriceServiceImpl extends ServiceImpl<PriceMapper, Price> implements IPriceService {
+public class PriceServiceImpl extends ServiceImpl<PriceMapper, Price> implements PriceService {
 
 }

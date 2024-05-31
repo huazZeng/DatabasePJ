@@ -2,7 +2,7 @@ package org.example.springboot.service.impl;
 
 import org.example.springboot.entity.Collect;
 import org.example.springboot.mapper.CollectMapper;
-import org.example.springboot.service.ICollectService;
+import org.example.springboot.service.CollectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
 @Service
-public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> implements ICollectService {
+public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> implements CollectService {
 
 }

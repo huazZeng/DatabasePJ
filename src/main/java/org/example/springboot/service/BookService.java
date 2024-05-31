@@ -1,6 +1,6 @@
 package org.example.springboot.service;
 
-import org.example.springboot.entity.Collect;
+import org.example.springboot.entity.Book;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
-public interface ICollectService extends IService<Collect> {
+public interface BookService extends IService<Book> {
 
 }

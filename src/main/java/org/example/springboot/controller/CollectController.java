@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
 @Controller
 @RequestMapping("/springboot/collect")

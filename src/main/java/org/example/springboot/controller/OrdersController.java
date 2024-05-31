@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
  * @since 2024-05-31
  */
 @Controller
-@RequestMapping("/springboot/root")
-public class RootController {
+@RequestMapping("/springboot/orders")
+public class OrdersController {
 
 }

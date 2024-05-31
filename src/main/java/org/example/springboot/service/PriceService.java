@@ -1,6 +1,6 @@
 package org.example.springboot.service;
 
-import org.example.springboot.entity.User;
+import org.example.springboot.entity.Price;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author hzz
  * @since 2024-05-31
  */
-public interface UserService extends IService<User> {
+public interface PriceService extends IService<Price> {
 
 }

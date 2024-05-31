@@ -1,8 +1,8 @@
 package org.example.springboot.service.impl;
 
-import org.example.springboot.entity.Book;
-import org.example.springboot.mapper.BookMapper;
-import org.example.springboot.service.BookService;
+import org.example.springboot.entity.Orders;
+import org.example.springboot.mapper.OrdersMapper;
+import org.example.springboot.service.OrdersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2024-05-31
  */
 @Service
-public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements BookService {
+public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> implements OrdersService {
 
 }

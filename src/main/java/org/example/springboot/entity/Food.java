@@ -3,6 +3,8 @@ package org.example.springboot.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * <p>
@@ -10,16 +12,18 @@ import java.math.BigDecimal;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
+@Getter
+@Setter
 @TableName("food")
 public class Food implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private Integer id;
 
-    private String catererId;
+    private Integer catererId;
 
     private String name;
 
@@ -27,54 +31,13 @@ public class Food implements Serializable {
 
     private String description;
 
-    public String getId() {
-        return id;
-    }
+    private String imagePath;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String ingredient;
 
-    public String getCatererId() {
-        return catererId;
-    }
+    private String nutrition;
 
-    public void setCatererId(String catererId) {
-        this.catererId = catererId;
-    }
+    private String allergen;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Food{" +
-            "id = " + id +
-            ", catererId = " + catererId +
-            ", name = " + name +
-            ", price = " + price +
-            ", description = " + description +
-        "}";
-    }
+    private String type;
 }

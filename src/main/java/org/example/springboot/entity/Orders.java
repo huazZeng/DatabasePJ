@@ -2,7 +2,6 @@ package org.example.springboot.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,14 +16,20 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("price")
-public class Price implements Serializable {
+@TableName("orders")
+public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer foodId;
+    private Integer id;
 
     private LocalDateTime time;
 
-    private BigDecimal price;
+    private Integer userId;
+
+    private Integer catererId;
+
+    private Boolean isQueueOrder;
+
+    private Boolean isFinished;
 }

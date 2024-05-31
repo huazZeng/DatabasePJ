@@ -1,6 +1,6 @@
 package org.example.springboot.service;
 
-import org.example.springboot.entity.User;
+import org.example.springboot.entity.OrderFood;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,9 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author hzz
- * @since 2024-05-21
+ * @since 2024-05-31
  */
-public interface IUserService extends IService<User> {
+public interface OrderFoodService extends IService<OrderFood> {
 
-    User getUserById(Long id);
 }
