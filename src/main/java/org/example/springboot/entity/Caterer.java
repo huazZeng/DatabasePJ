@@ -7,7 +7,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author hzz
@@ -27,8 +27,6 @@ public class Caterer implements Serializable {
     private String password;
 
     private String address;
-
-    private Integer featureFoodId;
 
     private Integer mainFoodId;
 }
