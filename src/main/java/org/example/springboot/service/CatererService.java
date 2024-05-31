@@ -1,5 +1,6 @@
 package org.example.springboot.service;
 
+import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.entity.Caterer;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -18,4 +19,6 @@ public interface CatererService extends IService<Caterer> {
     List<Caterer> findCaterBySearch(String search);
 
     Caterer findCaterById(int id);
+
+    CatererDetail findCaterDetailById(int id);
 }
