@@ -1,5 +1,7 @@
 package org.example.springboot.controller;
 
+import org.example.springboot.dto.CatererDetail;
+import org.example.springboot.dto.FoodDetail;
 import org.example.springboot.entity.Food;
 import org.example.springboot.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,14 @@ public class FoodController {
     public List<Food> findByCatererId(@RequestParam int catererId){
         return foodService.findByCatererId(catererId);
     }
+
+    @GetMapping("/searchInterestedFoodsInCaterer")//4.a
+    public List<Food> searchFoodInCaterer(@RequestParam Long catererId, @RequestParam String search) {
+        return foodService.searchFoodInCaterer(catererId, search);
+    }
+
+    @GetMapping("/findDetailById")
+    public FoodDetail findFoodDetailById(@RequestParam int id){return foodService.findFoodDetailById(id);}
+
+
 }

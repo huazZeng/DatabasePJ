@@ -1,7 +1,10 @@
 package org.example.springboot.service;
 
+import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.CatererComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CatererCommentService extends IService<CatererComment> {
 
+    List<CatererComment> findCatererCommentByCatererId(int catererId);
 }

@@ -1,5 +1,6 @@
 package org.example.springboot.service;
 
+import org.example.springboot.dto.FoodDetail;
 import org.example.springboot.entity.Food;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,4 +17,8 @@ import java.util.List;
 public interface FoodService extends IService<Food> {
 
     List<Food> findByCatererId(int catererId);
+
+    List<Food> searchFoodInCaterer(Long catererId, String search);
+
+    FoodDetail findFoodDetailById(int id);
 }
