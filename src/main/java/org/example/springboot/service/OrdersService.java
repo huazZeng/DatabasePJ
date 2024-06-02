@@ -3,6 +3,8 @@ package org.example.springboot.service;
 import org.example.springboot.entity.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrdersService extends IService<Orders> {
 
+    boolean placeOrder(Orders orders);
+
+    List<Orders> findOrdersByUserId(int userId);
 }
