@@ -132,12 +132,20 @@ FOREIGN KEY (user_id) REFERENCES user(id),
 FOREIGN KEY (caterer_id) REFERENCES caterer(id)
 );
 
-CREATE TABLE collect (
+CREATE TABLE food_collect (
 user_id INT NOT NULL,
 food_id INT NOT NULL,
 PRIMARY KEY (user_id, food_id),
 FOREIGN KEY (user_id) REFERENCES user(id),
 FOREIGN KEY (food_id) REFERENCES food(id)
+);
+
+CREATE TABLE caterer_collect (
+user_id INT NOT NULL,
+caterer_id INT NOT NULL,
+PRIMARY KEY (user_id, caterer_id),
+FOREIGN KEY (user_id) REFERENCES user(id),
+FOREIGN KEY (caterer_id) REFERENCES caterer(id)
 );
 
 
