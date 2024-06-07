@@ -1,7 +1,6 @@
 package org.example.springboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import org.example.springboot.entity.Food;
 import org.example.springboot.entity.FoodComment;
 import org.example.springboot.mapper.FoodCommentMapper;
 import org.example.springboot.service.FoodCommentService;
@@ -28,5 +27,11 @@ public class FoodCommentServiceImpl extends ServiceImpl<FoodCommentMapper, FoodC
         LambdaQueryWrapper<FoodComment> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(FoodComment::getFoodId, foodId);
         return foodCommentMapper.selectList(lambdaQueryWrapper);
+    }
+    @Override
+    public boolean insert(FoodComment comment){
+        int rows = foodCommentMapper.insert(comment);
+        // 返回操作结果
+        return rows > 0;
     }
 }

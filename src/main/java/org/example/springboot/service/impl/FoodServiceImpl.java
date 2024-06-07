@@ -2,9 +2,7 @@ package org.example.springboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.dto.FoodDetail;
-import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
 import org.example.springboot.entity.FoodComment;
 import org.example.springboot.entity.Price;
@@ -75,4 +73,67 @@ public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements Fo
         return foodDetail;
 
     }
+    @Override
+    public boolean updateFoodPrice(Food food){
+        Food currentFood = findById(food.getId());
+        if (currentFood == null) {
+            // 如果找不到对应的 Food 实例，返回 false
+            return false;
+        }
+        // 更新价格
+        currentFood.setPrice(food.getPrice());
+
+        // 保存更新后的 Food 实例到数据库
+        int rows = foodMapper.updateById(currentFood);
+
+        // 返回操作结果
+        return rows > 0;
+    }
+    @Override
+    public boolean deleteFood(Food food){
+            // 从数据库中查找当前的 Food 实例
+            Food currentFood = findById(food.getId());
+            if (currentFood == null) {
+                // 如果找不到对应的 Food 实例，返回 false
+                return false;
+            }
+            return  true;
+//            // 删除与该 Food 实例相关的评论
+//            boolean commentsDeleted = foodCommentService.deleteByFoodId(food.getId());
+//            if (!commentsDeleted) {
+//                // 如果删除评论失败，返回 false
+//                return false;
+//            }
+//
+//            // 删除与该 Food 实例相关的价格信息
+//            boolean pricesDeleted = priceService.deleteByFoodId(food.getId());
+//            if (!pricesDeleted) {
+//                // 如果删除价格信息失败，返回 false
+//                return false;
+//            }
+//
+//            // 删除 Food 实例
+//            int rows = foodMapper.deleteById(food.getId());
+
+            // 返回操作结果
+//            return rows > 0;
+
+    }
+    @Override
+    public boolean updateFoodType(Food food){
+        Food currentFood = findById(food.getId());
+        if (currentFood == null) {
+            // 如果找不到对应的 Food 实例，返回 false
+            return false;
+        }
+        // 更新价格
+        currentFood.setType(food.getType());
+
+        // 保存更新后的 Food 实例到数据库
+        int rows = foodMapper.updateById(currentFood);
+
+        // 返回操作结果
+        return rows > 0;
+    }
+
 }

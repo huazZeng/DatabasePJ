@@ -5,11 +5,8 @@ import org.example.springboot.dto.FoodDetail;
 import org.example.springboot.entity.Food;
 import org.example.springboot.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -40,5 +37,17 @@ public class FoodController {
     @GetMapping("/findDetailById")
     public FoodDetail findFoodDetailById(@RequestParam int id){return foodService.findFoodDetailById(id);}
 
+    @PostMapping("/updateprice")
+    public boolean updateFoodPrice(@RequestBody Food food){
+        return foodService.updateFoodPrice(food);
+    }
 
+    @PostMapping("/deleteFood")
+    public boolean deleteFood(@RequestBody Food food){
+        return foodService.deleteFood(food);
+    }
+    @PostMapping("/updateFoodtype")
+    public boolean updateFoodtype(@RequestBody Food food){
+        return foodService.updateFoodType(food);
+    }
 }

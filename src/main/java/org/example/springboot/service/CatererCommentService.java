@@ -17,4 +17,6 @@ import java.util.List;
 public interface CatererCommentService extends IService<CatererComment> {
 
     List<CatererComment> findCatererCommentByCatererId(int catererId);
+
+    boolean insert(CatererComment comment);
 }

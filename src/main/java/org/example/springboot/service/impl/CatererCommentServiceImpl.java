@@ -30,4 +30,10 @@ public class CatererCommentServiceImpl extends ServiceImpl<CatererCommentMapper,
         lambdaQueryWrapper.eq(CatererComment::getCatererId, catererId);
         return catererCommentMapper.selectList(lambdaQueryWrapper);
     }
+    @Override
+    public boolean insert(CatererComment comment){
+        int rows = catererCommentMapper.insert(comment);
+        // 返回操作结果
+        return rows > 0;
+    }
 }

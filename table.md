@@ -107,7 +107,7 @@ name VARCHAR(32) NOT NULL,
 password VARCHAR(32) NOT NULL,
 address VARCHAR(255),
 main_food_id INT NOT NULL,
-FOREIGN KEY (main_food_id) REFERENCES food(id),
+FOREIGN KEY (main_food_id) REFERENCES food(id)
 );
 
 CREATE TABLE food (

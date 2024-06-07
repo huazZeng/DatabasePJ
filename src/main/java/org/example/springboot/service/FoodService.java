@@ -21,4 +21,11 @@ public interface FoodService extends IService<Food> {
     List<Food> searchFoodInCaterer(Long catererId, String search);
 
     FoodDetail findFoodDetailById(int id);
+
+
+    boolean updateFoodPrice(Food food);
+
+    boolean deleteFood(Food food);
+
+    boolean updateFoodType(Food food);
 }

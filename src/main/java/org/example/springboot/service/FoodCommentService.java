@@ -17,4 +17,5 @@ public interface FoodCommentService extends IService<FoodComment> {
 
     public List<FoodComment> findByFoodId(int foodId);
 
+    boolean insert(FoodComment comment);
 }

@@ -2,13 +2,12 @@ package org.example.springboot.controller;
 
 import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.entity.Caterer;
+import org.example.springboot.entity.Food;
 import org.example.springboot.service.CatererService;
+import org.example.springboot.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -23,7 +22,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/springboot/caterer")
 public class CatererController {
-@Autowired
+    @Autowired
+    FoodService foodService;
+    @Autowired
     CatererService catererService;
     @GetMapping("/findBySearch")//2.a&b 这样返回的是全部内容。2个选择：1创建DTO对象 2前端选择性展示
     public List<Caterer> findCaterBySearch(@RequestParam String search){return catererService.findCaterBySearch(search);}
