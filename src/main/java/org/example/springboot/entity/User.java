@@ -7,7 +7,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author hzz
@@ -24,7 +24,7 @@ public class User implements Serializable {
 
     private String name;
 
-    private Boolean isStudent;
+    private String type;
 
     private String password;
 

@@ -92,9 +92,9 @@ food_id食物的id，type对应的食物的种类
 主键与外键引用关系可见下
 ## Create语句
 CREATE TABLE user (
-id INT PRIMARY KEY NOT NULL,
+id INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(32) NOT NULL,
-is_student BOOLEAN NOT NULL,
+type VARCHAR(16) NOT NULL,
 password VARCHAR(32) NOT NULL,
 s_id VARCHAR(32) NOT NULL,
 age INT,
@@ -176,11 +176,6 @@ PRIMARY KEY (food_id, time),
 FOREIGN KEY (food_id) REFERENCES food(id)
 );
 
-CREATE TABLE root (
-id INT PRIMARY KEY NOT NULL,
-name VARCHAR(32) NOT NULL,
-password VARCHAR(255) NOT NULL
-);
 
 CREATE TABLE caterer_comment(
 caterer_id INT NOT NULL,

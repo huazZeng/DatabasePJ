@@ -1,12 +1,21 @@
 package org.example.springboot.service.impl;
 
+
 import org.example.springboot.entity.Food;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.example.springboot.controller.UserController;
+
 import org.example.springboot.entity.User;
 import org.example.springboot.mapper.UserMapper;
 import org.example.springboot.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.example.springboot.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -16,7 +25,7 @@ import org.springframework.stereotype.Service;
  * @author hzz
  * @since 2024-05-31
  */
-@Service
+@Component
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Autowired
     private UserMapper userMapper;
@@ -24,6 +33,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public User getUserById(int id) {
         return userMapper.selectById(id);
     }
+
     @Override
     public boolean updateuser(User user){
         User currentUser = getUserById(user.getId());
@@ -32,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return false;
         }
         currentUser.setName(user.getName());
-        currentUser.setIsStudent(user.getIsStudent());
+        currentUser.setType(user.getType());
         currentUser.setPassword(user.getPassword());
         currentUser.setId(user.getId());
         currentUser.setAge(user.getAge());
@@ -51,5 +61,49 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return rows > 0;
     }
 
+
+
+
+    @Override
+    public JsonResult<User> register(User user) {
+        User getUser =getBySid(user.getSId());
+        if (getUser!=null){
+            return new JsonResult<User>(0,"user exists");
+        }
+        userMapper.insert(user);
+        return new JsonResult<User>(1,"register succeeded");
+    }
+
+    @Override
+    public JsonResult<User> login(String s_id, String password) {
+        User user=getBySid(s_id);
+        if (user==null){
+            return new JsonResult<>(0,"user not exits");
+        }
+        if (!user.getPassword().equals(password)){
+            return new JsonResult<>(0,"wrong password");
+        }
+        return new JsonResult<>(1,"login success",user);
+    }
+
+    @Override
+    public JsonResult<User> isLogin(HttpSession session) {
+        User settionUser=(User) session.getAttribute(UserController.SESSION_NAME);
+        if (settionUser==null){
+            return new JsonResult<>(0,"user not log in");
+        }
+        User getUser=getBySid(settionUser.getSId());
+        if (getUser==null||!getUser.getPassword().equals(settionUser.getPassword())){
+            return new JsonResult<>(0,"user info not valid");
+        }
+        return new JsonResult<>(1,"logged in",getUser);
+    }
+
+    @Override
+    public User getBySid(String s_id) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("s_id", s_id);
+        return userMapper.selectOne(queryWrapper);
+    }
 
 }

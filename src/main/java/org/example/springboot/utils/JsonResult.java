@@ -44,6 +44,12 @@ public class JsonResult<E> implements Serializable {
         this.data = null; // 默认数据为空
     }
 
+    public JsonResult(Integer state, String message,E data) {
+        this.state = state;
+        this.message = message;
+        this.data = data; // 默认数据为空
+    }
+
 
 
 }

@@ -4,10 +4,12 @@ import org.apache.ibatis.annotations.Update;
 import org.example.springboot.entity.User;
 import org.example.springboot.service.UserService;
 import org.example.springboot.utils.JsonResult;
+import org.example.springboot.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -21,6 +23,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/springboot/user")
 public class UserController {
+    public static final String SESSION_NAME="userInfo";
+
+
     @Autowired
     UserService userService;
     @GetMapping("/all")
@@ -39,7 +44,6 @@ public class UserController {
             // 如果找不到对应的用户，返回 false
             return false;
         }
-
         // 更新用户信息
         boolean isUpdated = userService.updateuser(user);
         // 返回操作结果
@@ -51,4 +55,27 @@ public class UserController {
         // 返回操作结果
         return isInserted;
     }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String id, @RequestParam String password, HttpServletRequest request) {
+        JsonResult<User> result;
+        result=userService.login(id,password);
+        if (result.getState()==1){
+            request.getSession().setAttribute(SESSION_NAME,result.getData());
+        }
+        return result.getMessage();
+    }
+
+    @PostMapping("/register")
+    public JsonResult<User> register(@RequestBody User user){
+        return userService.register(user);
+    }
+
+    @PostMapping("/is-login")
+    public String isLogin(HttpServletRequest request){
+        return userService.isLogin(request.getSession()).getMessage();
+    }
+
+
+
 }
