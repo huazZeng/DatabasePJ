@@ -3,6 +3,8 @@ package org.example.springboot.service;
 import org.example.springboot.entity.Messages;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MessagesService extends IService<Messages> {
 
+    List<Messages> findMessageByUserId(int userId);
 }

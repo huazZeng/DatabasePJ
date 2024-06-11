@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface FoodCollectService extends IService<FoodCollect> {
 
+    boolean insert(FoodCollect foodCollect);
 }

@@ -3,6 +3,8 @@ package org.example.springboot.mapper;
 import org.example.springboot.entity.Messages;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口

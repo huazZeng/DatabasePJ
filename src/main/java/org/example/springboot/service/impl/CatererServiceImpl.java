@@ -5,7 +5,6 @@ import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
 import org.example.springboot.mapper.CatererMapper;
-import org.example.springboot.mapper.FoodMapper;
 import org.example.springboot.service.CatererService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.example.springboot.service.FoodService;
@@ -52,6 +51,13 @@ FoodService foodService;
         catererDetail.setFoodList(foods);
         catererDetail.setMainFoodId(caterer.getMainFoodId());
         return catererDetail;
+    }
+
+    @Override
+    public boolean insert(Caterer caterer) {
+        int rows = catererMapper.insert(caterer);
+        // 返回操作结果
+        return rows > 0;
     }
 
 
