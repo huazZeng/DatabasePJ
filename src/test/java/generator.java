@@ -12,7 +12,7 @@ public class generator {
 
 
 
-        FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/database_pj", "root", "187415157")
+        FastAutoGenerator.create("jdbc:mysql://127.0.0.1:3306/database_pj", "root", "0301zhz")
                 .globalConfig(builder -> {
                     builder.author("hzz") // 设置作者
                             //.enableSwagger() // 开启 swagger 模式
@@ -34,7 +34,7 @@ public class generator {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, "src/main/resources/mapper")); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("user") // 设置需要生成的表名
+                    builder.addInclude("caterer_collect") // 设置需要生成的表名
                             .addTablePrefix("")
                             // Entity 策略配置
                             .entityBuilder()

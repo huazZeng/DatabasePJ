@@ -2,7 +2,6 @@ package org.example.springboot.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -10,9 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author hzz
- * @since 2024-05-31
+ * @since 2024-06-11
  */
-@RestController
-@RequestMapping("/springboot/collect")
-public class CollectController {
+@Controller
+@RequestMapping("/springboot/catererCollect")
+public class CatererCollectController {
 
+}
