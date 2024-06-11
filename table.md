@@ -253,4 +253,5 @@ DECLARE caterer_name VARCHAR(255);
     END IF;
 END;
 $$
+$$
 DELIMITER ;
