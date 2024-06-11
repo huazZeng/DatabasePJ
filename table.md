@@ -100,16 +100,6 @@ s_id VARCHAR(32) NOT NULL,
 age INT,
 gender CHAR(1)
 );
-
-CREATE TABLE caterer (
-id INT PRIMARY KEY NOT NULL,
-name VARCHAR(32) NOT NULL,
-password VARCHAR(32) NOT NULL,
-address VARCHAR(255),
-main_food_id INT NOT NULL,
-FOREIGN KEY (main_food_id) REFERENCES food(id)
-);
-
 CREATE TABLE food (
 id INT PRIMARY KEY NOT NULL,
 caterer_id INT references caterer(id),
@@ -122,6 +112,16 @@ nutrition VARCHAR(255) NOT NULL,
 allergen VARCHAR(255),
 type VARCHAR(32)
 );
+CREATE TABLE caterer (
+id INT PRIMARY KEY NOT NULL,
+name VARCHAR(32) NOT NULL,
+password VARCHAR(32) NOT NULL,
+address VARCHAR(255),
+main_food_id INT NOT NULL,
+FOREIGN KEY (main_food_id) REFERENCES food(id)
+);
+
+
 
 CREATE TABLE book (
 id INT PRIMARY KEY NOT NULL,
