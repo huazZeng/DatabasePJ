@@ -1,7 +1,9 @@
 package org.example.springboot.controller;
 
 import org.apache.ibatis.annotations.Update;
+import org.example.springboot.entity.Book;
 import org.example.springboot.entity.User;
+import org.example.springboot.service.BookService;
 import org.example.springboot.service.UserService;
 import org.example.springboot.utils.JsonResult;
 import org.example.springboot.utils.Result;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -28,6 +31,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    BookService bookService;
     @GetMapping("/all")
     public List<User> findAll(){
         return  userService.list();
@@ -81,4 +87,14 @@ public class UserController {
         return (User) request.getSession().getAttribute(UserController.SESSION_NAME);
     }
 
+    @GetMapping("/book")
+    public String book(HttpServletRequest request,@RequestParam int catererId){
+        User user=(User) request.getSession().getAttribute(UserController.SESSION_NAME);
+        Book book=new Book();
+        book.setUserId(user.getId());
+        book.setTime(LocalDateTime.now());
+        book.setCatererId(catererId);
+        if (bookService.insert(book)) return "book success";
+        else return "book failed";
+    }
 }
