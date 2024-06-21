@@ -4,17 +4,18 @@
     <select id="getCollectAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.CollectAnalysis">
         SELECT f.id AS foodId,
         f.name AS foodName,
+        o1.is_queue_order  AS is_queue_order,
         COALESCE(SUM(CASE WHEN o1.time >= DATE_SUB(NOW(), INTERVAL 1 WEEK) THEN 1 ELSE 0 END), 0) AS salesLastWeek,
         COALESCE(SUM(CASE WHEN o2.time >= DATE_SUB(NOW(), INTERVAL 1 MONTH) THEN 1 ELSE 0 END), 0) AS salesLastMonth,
         COALESCE(SUM(CASE WHEN o3.time >= DATE_SUB(NOW(), INTERVAL 1 YEAR) THEN 1 ELSE 0 END), 0) AS salesLastYear
         FROM food f
         JOIN food_collect fc ON f.id = fc.food_id
         LEFT JOIN order_food ofd ON f.id = ofd.food_id
-        LEFT JOIN orders o1 ON ofd.order_id = o1.id AND o1.user_id = #{userId}
-        LEFT JOIN orders o2 ON ofd.order_id = o2.id AND o2.user_id = #{userId}
-        LEFT JOIN orders o3 ON ofd.order_id = o3.id AND o3.user_id = #{userId}
+        LEFT JOIN orders o1 ON ofd.order_id = o1.id
+        LEFT JOIN orders o2 ON ofd.order_id = o2.id
+        LEFT JOIN orders o3 ON ofd.order_id = o3.id
         WHERE fc.user_id = #{id}
-        GROUP BY f.id, f.name;
+        GROUP BY f.id, f.name,o1.is_queue_order;
     </select>
 
     <select id="getFoodanalysis" parameterType="Integer" resultType="org.example.springboot.dto.Foodanalysis">

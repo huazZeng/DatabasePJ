@@ -7,6 +7,7 @@ public class CollectAnalysis{
         private int foodId;
         private String foodName;
         private int salesLastWeek;
+        private  int is_queue_order;
         private int salesLastMonth;
         private int salesLastYear;
 
