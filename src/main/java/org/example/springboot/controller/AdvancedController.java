@@ -3,7 +3,6 @@ package org.example.springboot.controller;
 import org.example.springboot.dto.*;
 import org.example.springboot.mapper.AdvancedMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,19 +21,32 @@ public class AdvancedController {
     }
     @GetMapping("/CollectAnalysis")
     public List<CollectAnalysis> getCollectAnalysis(@RequestParam Integer id){
+        System.out.println(1);
         return  advancedMapper.getCollectAnalysis(id);
     }
-    @GetMapping("/AgeAnalysis")
-    public  List<AgeAnalysis> getAgeAnlysis(){
+    @GetMapping("/AgeCommentAnalysis")
+    public  List<AgeCommentAnalysis> getAgeCommentAnlysis(){
         return advancedMapper.getAgeAnlysis();
     }
-    @GetMapping("/RoleAnalysis")
-    public  List<RoleAnalysis> getRoleAnalysis(){
+    @GetMapping("/RoleCommentAnalysis")
+    public  List<RoleCommentAnalysis> getRoleCommentAnalysis(){
         return advancedMapper.getRoleAnalysis();
     }
-    @GetMapping("/GenderAnalysis")
-    public List<GenderAnalysis> getGenderAnalysis(){
+    @GetMapping("/GenderCommentAnalysis")
+    public List<GenderCommentAnalysis> getGenderCommentAnalysis(){
         return advancedMapper.getGenderAnalysis();
+    }
+    @GetMapping("/AgeOrderAnalysis")
+    public  List<AgeOrderAnalysis> getAgeOrderAnlysis(){
+        return advancedMapper.getAgeOrderAnalysis();
+    }
+    @GetMapping("/RoleOrderAnalysis")
+    public  List<RoleOrderAnalysis> getRoleOrderAnalysis(){
+        return advancedMapper.getRoleOrderAnalysis();
+    }
+    @GetMapping("/GenderOrderAnalysis")
+    public List<GenderOrderAnalysis> getGenderOrderAnalysis(){
+        return advancedMapper.getGenderOrderAnalysis();
     }
     @GetMapping("/HabitAnalysis")
     public  List<HabitAnalysis> getHabitAnalysis(@RequestParam Integer id){

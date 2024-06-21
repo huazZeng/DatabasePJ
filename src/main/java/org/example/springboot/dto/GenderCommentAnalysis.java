@@ -3,8 +3,10 @@ package org.example.springboot.dto;
 import lombok.Data;
 
 @Data
-public class RoleAnalysis {
-    private String userRole;
-    private Integer orderCount;
+public class GenderCommentAnalysis {
+    private String Gender;
+
+    private Integer commentCount;
     private Double averageRating;
+
 }

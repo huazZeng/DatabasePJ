@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
-//    private static final String[] all = {
+    private static final String[] all = {
 //            "/springboot/book/**",
 //            "/springboot/catererComment/**",
 //            "/springboot/caterer/**",
@@ -20,44 +20,47 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //            "/springboot/orderFood/**",
 //            "/springboot/price/**",
 //            "/springboot/user/**"
-//
-//    };
-//
-//    // 与登录和注册相关的界面和请求
-//    public static final String[] aboutLogin = {
+            "/springboot/**"
+
+    };
+
+    // 与登录和注册相关的界面和请求
+    public static final String[] aboutLogin = {
 //            "/springboot/user/login",
 //            "/springboot/user/register"
-//    };
-//
-//    public static final String[] aboutUser = {
+            "/springboot/**"
+    };
+
+    public static final String[] aboutUser = {
 //            "/springboot/user/login",
 //            "/springboot/user/register",
 //            "/springboot/user/**"
-//
-//    };
-//
-//    public static final String[] aboutCaterer= {
+            "/springboot/**"
+    };
+
+    public static final String[] aboutCaterer= {
 //            "/springboot/user/login",
 //            "/springboot/user/register",
 //            "/springboot/caterer/**"
-//    };
-//
-//
-//
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new LoginInterceptor())
-//                .addPathPatterns(all)
-//                .excludePathPatterns(aboutLogin);
-//
-//        registry.addInterceptor(new CatererInterceptor())
-//                .addPathPatterns(all)
-//                .excludePathPatterns(aboutCaterer);
-//
-//        registry.addInterceptor(new UserInterceptor())
-//                .addPathPatterns(all)
-//                .excludePathPatterns(aboutUser);
-//
-//
-//    }
+            "/springboot/**"
+    };
+
+
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginInterceptor())
+                .addPathPatterns(all)
+                .excludePathPatterns(aboutLogin);
+
+        registry.addInterceptor(new CatererInterceptor())
+                .addPathPatterns(all)
+                .excludePathPatterns(aboutCaterer);
+
+        registry.addInterceptor(new UserInterceptor())
+                .addPathPatterns(all)
+                .excludePathPatterns(aboutUser);
+
+
+    }
 }

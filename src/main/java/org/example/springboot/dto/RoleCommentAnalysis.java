@@ -3,8 +3,8 @@ package org.example.springboot.dto;
 import lombok.Data;
 
 @Data
-public class AgeAnalysis {
-    private String ageGroup;
+public class RoleCommentAnalysis {
+    private String userRole;
     private Integer commentCount;
     private Double averageRating;
 }

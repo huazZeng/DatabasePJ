@@ -2,88 +2,225 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.springboot.mapper.AdvancedMapper">
     <select id="getCollectAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.CollectAnalysis">
-        WITH FilteredOrders AS (
+        SELECT f.id AS foodId,
+        f.name AS foodName,
+        COALESCE(SUM(CASE WHEN o1.time >= DATE_SUB(NOW(), INTERVAL 1 WEEK) THEN 1 ELSE 0 END), 0) AS salesLastWeek,
+        COALESCE(SUM(CASE WHEN o2.time >= DATE_SUB(NOW(), INTERVAL 1 MONTH) THEN 1 ELSE 0 END), 0) AS salesLastMonth,
+        COALESCE(SUM(CASE WHEN o3.time >= DATE_SUB(NOW(), INTERVAL 1 YEAR) THEN 1 ELSE 0 END), 0) AS salesLastYear
+        FROM food f
+        JOIN food_collect fc ON f.id = fc.food_id
+        LEFT JOIN order_food ofd ON f.id = ofd.food_id
+        LEFT JOIN orders o1 ON ofd.order_id = o1.id AND o1.user_id = #{userId}
+        LEFT JOIN orders o2 ON ofd.order_id = o2.id AND o2.user_id = #{userId}
+        LEFT JOIN orders o3 ON ofd.order_id = o3.id AND o3.user_id = #{userId}
+        WHERE fc.user_id = #{id}
+        GROUP BY f.id, f.name;
+    </select>
+
+    <select id="getFoodanalysis" parameterType="Integer" resultType="org.example.springboot.dto.Foodanalysis">
+        SELECT f.name AS foodName,
+        AVG(fc.grade) AS avgGrade,
+        COUNT(ofd.food_id) AS saleCount,
+        u.name AS personBuyMost
+        FROM food f
+        LEFT JOIN food_comment fc ON f.id = fc.food_id
+        LEFT JOIN order_food ofd ON f.id = ofd.food_id
+        LEFT JOIN orders o ON ofd.order_id = o.id
+        LEFT JOIN user u ON o.user_id = u.id
+        WHERE f.caterer_id = #{id}
+        GROUP BY f.id, u.name
+        ORDER BY f.name;
+
+
+
+    </select>
+
+
+
+    <select id="getHabitAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.HabitAnalysis">
+        SELECT u.id AS userId,
+        f.id AS foodId,
+        f.name AS foodName,
+        COUNT(ofd.food_id) AS purchaseCount
+        FROM orders o
+        JOIN user u ON o.user_id = u.id
+        JOIN order_food ofd ON o.id = ofd.order_id
+        JOIN food f ON ofd.food_id = f.id
+        WHERE o.caterer_id =  #{id}-- 替换为商户的 ID
+        AND u.id IN (
+        SELECT user_id
+        FROM (
+        SELECT user_id, COUNT(*) AS orderCount
+        FROM orders
+        WHERE caterer_id =  #{id}
+        AND time >= DATE_SUB(NOW(), INTERVAL 1 YEAR)  -- 按照一年的时间段进行选择
+        GROUP BY user_id
+        HAVING orderCount > 5 -- 定义忠实粉丝的阈值，例如超过多少次订单
+        ) AS loyalFans
+        )
+        GROUP BY u.id, u.name, f.id, f.name
+        ORDER BY u.id, f.id;
+
+
+
+
+    </select>
+
+
+    <select id="getAgeAnalysis"  resultType="org.example.springboot.dto.AgeCommentAnalysis">
         SELECT
-        orf.food_id,
-        o.time
+        CASE
+        WHEN u.age BETWEEN 0 AND 17 THEN '0-17'
+        WHEN u.age BETWEEN 18 AND 24 THEN '18-24'
+        WHEN u.age BETWEEN 25 AND 34 THEN '25-34'
+        WHEN u.age BETWEEN 35 AND 44 THEN '35-44'
+        WHEN u.age BETWEEN 45 AND 54 THEN '45-54'
+        WHEN u.age >= 55 THEN '55+'
+        ELSE 'Unknown'
+        END AS ageGroup,
+        COUNT(*) AS commentCount,
+        AVG(fc.grade) AS averageRating
+        FROM
+        user u
+        JOIN
+        food_comment fc ON u.id = fc.user_id
+        GROUP BY
+        ageGroup
+        ORDER BY
+        ageGroup;
+    </select>
+    <select id="getRoleAnalysis"  resultType="org.example.springboot.dto.RoleCommentAnalysis">
+        SELECT
+        u.type AS userRole,
+        COUNT(*) AS commentCount,
+        AVG(fc.grade) AS averageRating
+        FROM
+        user u
+        LEFT JOIN
+        food_comment fc ON u.id = fc.user_id
+        GROUP BY
+        u.type
+        ORDER BY
+        u.type;
+
+    </select>
+
+
+    <select id="getGenderAnalysis"  resultType="org.example.springboot.dto.GenderCommentAnalysis">
+        SELECT
+        u.gender AS gender,
+        COUNT(*) AS commentCount,
+        AVG(fc.grade) AS averageRating
+        FROM
+        user u
+        JOIN
+        food_comment fc ON u.id = fc.user_id
+        GROUP BY
+        u.gender
+        ORDER BY
+        u.gender;
+    </select>
+    <select id="getHourlyActivityDTO"  resultType="org.example.springboot.dto.HourlyActivityDTO">
+        SELECT
+        o.user_id AS userId,
+        HOUR(o.time) AS hourOfDay,
+        COUNT(*) AS orderCount
         FROM
         orders o
-        JOIN
-        order_food orf ON o.id = orf.order_id
-        ),
-        SalesLastWeek AS (
-        SELECT
-        fo.food_id,
-        COUNT(fo.food_id) AS sales_count_week
-        FROM
-        FilteredOrders fo
         WHERE
-        fo.time >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
+        o.time >= DATE_SUB(NOW(), INTERVAL 7 DAY)
         GROUP BY
-        fo.food_id
-        ),
-        SalesLastMonth AS (
-        SELECT
-        fo.food_id,
-        COUNT(fo.food_id) AS sales_count_month
-        FROM
-        FilteredOrders fo
-        WHERE
-        fo.time >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
-        GROUP BY
-        fo.food_id
-        ),
-        SalesLastYear AS (
-        SELECT
-        fo.food_id,
-        COUNT(fo.food_id) AS sales_count_year
-        FROM
-        FilteredOrders fo
-        WHERE
-        fo.time >= DATE_SUB(NOW(), INTERVAL 1 YEAR)
-        GROUP BY
-        fo.food_id
-        )
-        SELECT
-        fc.food_id,
-        f.name AS food_name,
-        COALESCE(sw.sales_count_week, 0) AS sales_last_week,
-        COALESCE(sm.sales_count_month, 0) AS sales_last_month,
-        COALESCE(sy.sales_count_year, 0) AS sales_last_year
-        FROM
-        food_collect fc
-        JOIN
-        food f ON fc.food_id = f.id
-        LEFT JOIN
-        SalesLastWeek sw ON fc.food_id = sw.food_id
-        LEFT JOIN
-        SalesLastMonth sm ON fc.food_id = sm.food_id
-        LEFT JOIN
-        SalesLastYear sy ON fc.food_id = sy.food_id
-        WHERE
-        fc.user_id = {id}
+        userId, hourOfDay
         ORDER BY
-        fc.food_id;
-    </select>
-    <select id="getFoodanalysis" parameterType="Integer" resultType="org.example.springboot.dto.Foodanalysis">
+        userId, hourOfDay;
 
-    </select>
-    <select id="getHabitAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.HabitAnalysis">
-
-    </select>
-
-
-    <select id="getAgeAnlysis"  resultType="org.example.springboot.dto.AgeAnalysis">
-    </select>
-    <select id="getRoleAnalysis"  resultType="org.example.springboot.dto.RoleAnalysis">
-    </select>
-    <select id="getGenderAnalysis"  resultType="org.example.springboot.dto.GenderAnalysis">
-    </select>
-    <select id="getHourluActivityDTO"  resultType="org.example.springboot.dto.HourlyActivityDTO">
     </select>
     <select id="getMonthlyOrderFrequencyDTO"  resultType="org.example.springboot.dto.MonthlyOrderFrequencyDTO">
-    </select>
-    <select id="getWeeklyOrder"  resultType="org.example.springboot.dto.WeeklyOrderFrequencyDTO">
+        SELECT
+        o.user_id AS userId,
+        DATE_FORMAT(o.time, '%Y-%m') AS month,
+        COUNT(*) AS orderCount
+        FROM
+        orders o
+        WHERE
+        o.time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        GROUP BY
+        userId, month
+        ORDER BY
+        userId, month;
+
 
     </select>
+    <select id="getWeeklyOrder"  resultType="org.example.springboot.dto.WeeklyOrderFrequencyDTO">
+        SELECT
+        o.user_id AS userId,
+        DATE_FORMAT(o.time, '%x-%v') AS week,
+        COUNT(*) AS orderCount
+        FROM
+        orders o
+        WHERE
+        o.time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        GROUP BY
+        userId, week
+        ORDER BY
+        userId, week;
+    </select>
+
+    <select id="getAgeOrderAnlysis"  resultType="org.example.springboot.dto.AgeOrderAnalysis">
+        SELECT
+        CASE
+        WHEN u.age BETWEEN 0 AND 17 THEN '0-17'
+        WHEN u.age BETWEEN 18 AND 24 THEN '18-24'
+        WHEN u.age BETWEEN 25 AND 34 THEN '25-34'
+        WHEN u.age BETWEEN 35 AND 44 THEN '35-44'
+        WHEN u.age BETWEEN 45 AND 54 THEN '45-54'
+        WHEN u.age >= 55 THEN '55+'
+        ELSE 'Unknown'
+        END AS ageGroup,
+        o.caterer_id AS catererId,
+        COUNT(o.id) AS count
+        FROM
+        user u
+        JOIN
+        orders o ON u.id = o.user_id
+        WHERE
+        u.age IS NOT NULL
+        GROUP BY
+        ageGroup, catererId
+        ORDER BY
+        catererId, ageGroup;
+
+    </select>
+
+    <select id="getRoleOrderAnalysis"  resultType="org.example.springboot.dto.RoleOrderAnalysis">
+        SELECT
+        u.type AS role,
+        o.caterer_id AS catererId,
+        COUNT(o.id) AS count
+        FROM
+        user u
+        JOIN
+        orders o ON u.id = o.user_id
+        GROUP BY
+        role, catererId
+        ORDER BY
+        catererId, role;
+    </select>
+
+    <select id="getGenderOrderAnalysis"  resultType="org.example.springboot.dto.GenderOrderAnalysis">
+        SELECT
+        u.gender AS gender,
+        o.caterer_id AS catererId,
+        COUNT(o.id) AS count
+        FROM
+        user u
+        JOIN
+        orders o ON u.id = o.user_id
+        GROUP BY
+        gender, catererId
+        ORDER BY
+        catererId, gender;
+
+    </select>
+
 </mapper>

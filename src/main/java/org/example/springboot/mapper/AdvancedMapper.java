@@ -9,11 +9,11 @@ public interface AdvancedMapper {
 
     List<CollectAnalysis> getCollectAnalysis(Integer id);
 
-    List<AgeAnalysis> getAgeAnlysis();
+    List<AgeCommentAnalysis> getAgeAnlysis();
 
-    List<RoleAnalysis> getRoleAnalysis();
+    List<RoleCommentAnalysis> getRoleAnalysis();
 
-    List<GenderAnalysis> getGenderAnalysis();
+    List<GenderCommentAnalysis> getGenderAnalysis();
 
     List<HabitAnalysis> getHabitAnalysis(Integer id);
 
@@ -22,4 +22,10 @@ public interface AdvancedMapper {
     List<MonthlyOrderFrequencyDTO> getMonthlyOrderFrequencyDTO();
 
     List<WeeklyOrderFrequencyDTO> getWeeklyOrder();
+
+    List<RoleOrderAnalysis> getRoleOrderAnalysis();
+
+    List<GenderOrderAnalysis> getGenderOrderAnalysis();
+
+    List<AgeOrderAnalysis> getAgeOrderAnalysis();
 }
