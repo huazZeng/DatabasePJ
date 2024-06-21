@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,10 +47,14 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     }
 
     @Override
-    public List<Orders> findOrdersByCatererId(int catererId) {
+    public IPage<Orders> findOrdersByCatererId(int catererId,int pageNumber,int  pageSize) {
         LambdaQueryWrapper<Orders> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Orders::getCatererId, catererId);
-        return ordersMapper.selectList(lambdaQueryWrapper);
+//        return ordersMapper.selectList(lambdaQueryWrapper);
+        Page<Orders> page = new Page<>(pageNumber, pageSize);
+
+        // 执行查询，MyBatis-Plus 会自动进行分页
+        return ordersMapper.selectPage(page, lambdaQueryWrapper);
     }
 
     @Override
@@ -70,11 +75,12 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             orderDetail.setIsFinished(orders1.getIsFinished());
             orderDetail.setTime(orders1.getTime());
             orderDetail.setCatererId(orders1.getCatererId());
-            orderDetail.setFoods(orderFoodService.findFoodsByOrderId(orders1.getId()));
+            orderDetail.setFoods(orderFoodService.findFoodsMapByOrderId(orders1.getId()));
 
             orderDetails.add(orderDetail);
 
         }
+        Collections.reverse(orderDetails);
 
 
         return orderDetails;
@@ -94,5 +100,19 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
         // 执行查询，MyBatis-Plus 会自动进行分页
         return ordersMapper.selectPage(page, null);
+    }
+
+    @Override
+    public OrderDetail findDetailById(int id) {
+        OrderDetail orderDetail=new OrderDetail();
+        Orders orders = ordersMapper.selectById(id);
+        orderDetail.setId(orders.getId());
+        orderDetail.setIsQueueOrder(orders.getIsQueueOrder());
+        orderDetail.setIsFinished(orders.getIsFinished());
+        orderDetail.setTime(orders.getTime());
+        orderDetail.setCatererId(orders.getCatererId());
+        orderDetail.setFoods(orderFoodService.findFoodsMapByOrderId(orders.getId()));
+
+        return orderDetail;
     }
 }

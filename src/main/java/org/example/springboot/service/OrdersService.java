@@ -21,7 +21,7 @@ public interface OrdersService extends IService<Orders> {
 
     List<Orders> findOrdersByUserId(int userId);
 
-    List<Orders> findOrdersByCatererId(int catererId);
+    IPage<Orders>findOrdersByCatererId(int catererId,int pageNumber, int pageSize);
 
     int getInsertId();
 
@@ -30,4 +30,6 @@ public interface OrdersService extends IService<Orders> {
     boolean complecterId(int orderId);
 
     IPage<Orders> getOrdersByPage(int pageNumber, int pageSize);
+
+    OrderDetail findDetailById(int id);
 }

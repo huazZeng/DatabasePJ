@@ -72,6 +72,15 @@ public class UserController {
         return result.getMessage();
     }
 
+    @PostMapping("/logout")
+    public void logout(HttpServletRequest request){
+
+        request.getSession().setAttribute(SESSION_NAME,null);
+
+
+
+    }
+
     @PostMapping("/register")
     public JsonResult<User> register(@RequestBody User user){
         return userService.register(user);

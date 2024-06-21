@@ -5,6 +5,7 @@ import org.example.springboot.entity.Food;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class OrderDetail {
@@ -18,6 +19,6 @@ public class OrderDetail {
 
     private Boolean isFinished;
 
-    private List<Integer> foods;
+    private Map<Integer, Integer> foods;
 
 }

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -39,7 +40,7 @@ public class OrdersController {
 
     @Transactional
     @PostMapping("/placeOrder")//下单成功，并验证了触发器也实现正确
-    public JsonResult<String> placeOrder(HttpServletRequest request,@RequestParam int catererId,@RequestParam boolean isQueueOrder,@RequestBody List<Integer> orderFoods){
+    public JsonResult<String> placeOrder(HttpServletRequest request,@RequestParam int catererId,@RequestParam boolean isQueueOrder,@RequestBody Map<Integer, Integer> orderFoods){
         Orders orders=new Orders();
         User user=(User) request.getSession().getAttribute(UserController.SESSION_NAME);
         int insertId=ordersService.getInsertId();
@@ -56,10 +57,11 @@ public class OrdersController {
 
 
 
-        for(int i:orderFoods){
+        for(Map.Entry<Integer, Integer> entry : orderFoods.entrySet()){
             OrderFood orderFood=new OrderFood();
             orderFood.setOrderId(insertId);
-            orderFood.setFoodId(i);
+            orderFood.setFoodId(entry.getKey());
+            orderFood.setQuantity(entry.getValue());
             orderFoodService.placeOrder(orderFood);
         }
 

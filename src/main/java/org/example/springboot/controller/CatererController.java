@@ -1,8 +1,10 @@
 package org.example.springboot.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.example.springboot.dto.CatererBrief;
 import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.dto.Foodanalysis;
+import org.example.springboot.dto.OrderDetail;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
 import org.example.springboot.entity.Orders;
@@ -103,15 +105,21 @@ public class CatererController {
     }
 
     @GetMapping("/findMyOrder")
-    public List<Orders> findOrdersForMe(HttpServletRequest request){
+    public IPage<Orders> findOrdersForMe(HttpServletRequest request, @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
+                                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         Caterer caterer=(Caterer)request.getSession().getAttribute(UserController.SESSION_NAME);
-        return ordersService.findOrdersByCatererId(caterer.getId());
+        return ordersService.findOrdersByCatererId(caterer.getId(),pageNumber, pageSize);
     }
 
     @GetMapping("/completeOrder")
     public String completeOrder(@RequestParam int orderId){
         if(ordersService.complecterId(orderId)) return "order completed";
         else return "failed";
+    }
+
+    @GetMapping("/findDetailOrder")
+    public OrderDetail findDetailOrder(@RequestParam int orderId){
+        return ordersService.findDetailById(orderId);
     }
 
     @GetMapping("/delete")
