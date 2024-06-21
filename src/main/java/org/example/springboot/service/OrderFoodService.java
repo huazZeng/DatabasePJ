@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.example.springboot.entity.Orders;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,6 +20,9 @@ public interface OrderFoodService extends IService<OrderFood> {
     boolean placeOrder(OrderFood orderFood);
 
     List<Integer> findFoodsByOrderId(int orderId);
+
+    Map<Integer, Integer> findFoodsMapByOrderId(int orderId);
+
 
 
 }

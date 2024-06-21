@@ -7,7 +7,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author hzz
@@ -23,4 +23,6 @@ public class OrderFood implements Serializable {
     private Integer orderId;
 
     private Integer foodId;
+
+    private Integer quantity;
 }

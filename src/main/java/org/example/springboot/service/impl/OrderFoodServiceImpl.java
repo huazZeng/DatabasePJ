@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -46,5 +48,19 @@ public class OrderFoodServiceImpl extends ServiceImpl<OrderFoodMapper, OrderFood
 
 
 
+    }
+
+    @Override
+    public Map<Integer, Integer> findFoodsMapByOrderId(int orderId) {
+        LambdaQueryWrapper<OrderFood> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(OrderFood::getOrderId, orderId);
+
+        List<OrderFood> orderFoods= orderFoodMapper.selectList(lambdaQueryWrapper);
+        Map<Integer, Integer> orderFoodId=new HashMap<>();
+
+        for (OrderFood orderFood:orderFoods){
+            orderFoodId.put(orderFood.getFoodId(),orderFood.getQuantity());
+        }
+        return orderFoodId;
     }
 }

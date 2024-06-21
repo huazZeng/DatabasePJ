@@ -27,9 +27,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public static final String[] aboutLogin = {
             "/springboot/user/login",
             "/springboot/user/register",
-            "/springboot/caterer/login",
+            "/springboot/caterer/login"
 
-            "/springboot/**"
+//            "/springboot/**"
     };
 
     public static final String[] aboutUser = {
@@ -52,25 +52,27 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/springboot/messages/find-my",
             "/springboot/catererComment/**",
             "/springboot/foodComment/**",
+            "/springboot/user/logout"
 
 
-            "/springboot/**"
+//            "/springboot/**"
 
     };
 
     public static final String[] aboutCaterer= {
 //            "/springboot/user/login",
 //            "/springboot/user/register",
-//            "/springboot/caterer/login",
-//            "/springboot/caterer/find-my",
-//            "/springboot/caterer/insert",
-//            "/springboot/caterer/change-price",
-//            "/springboot/caterer/completeOrder",
-//            "/springboot/caterer/change-type",
-//            "/springboot/caterer/findMyOrder",
-//            "/springboot/user/login",
-
-            "/springboot/**"
+            "/springboot/caterer/login",
+            "/springboot/caterer/find-my",
+            "/springboot/caterer/insert",
+            "/springboot/caterer/change-price",
+            "/springboot/caterer/completeOrder",
+            "/springboot/caterer/change-type",
+            "/springboot/caterer/findMyOrder",
+            "/springboot/user/login",
+            "/springboot/user/logout",
+            "/springboot/caterer/findDetailOrder",
+//            "/springboot/**"
     };
 
 

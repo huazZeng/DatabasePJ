@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,7 +29,8 @@ public class MessagesServiceImpl extends ServiceImpl<MessagesMapper, Messages> i
     public List<Messages> findMessageByUserId(int userId) {
         LambdaQueryWrapper<Messages> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Messages::getUserId, userId);
-
-        return messagesMapper.selectList(lambdaQueryWrapper);
+        List<Messages> results=messagesMapper.selectList(lambdaQueryWrapper);
+        Collections.reverse(results);
+        return results;
     }
 }
