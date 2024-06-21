@@ -6,16 +6,13 @@ import org.example.springboot.entity.Food;
 import java.util.List;
 
 @Data
-public class CatererDetail {
+public class CatererBrief {
     private Integer id;
 
     private String name;
 
     private String address;
 
-    private Integer mainFoodId;
-
-    private List<Food> foodList;
-
+    private String mainFoodName;
 
 }

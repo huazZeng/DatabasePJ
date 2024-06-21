@@ -10,36 +10,38 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
     private static final String[] all = {
-            "/springboot/book/**",
-            "/springboot/catererComment/**",
-            "/springboot/caterer/**",
-            "/springboot/collect/**",
-            "/springboot/foodComment/**",
-            "/springboot/food/**",
-            "/springboot/messages/**",
-            "/springboot/orderFood/**",
-            "/springboot/price/**",
-            "/springboot/user/**"
+//            "/springboot/book/**",
+//            "/springboot/catererComment/**",
+//            "/springboot/caterer/**",
+//            "/springboot/collect/**",
+//            "/springboot/foodComment/**",
+//            "/springboot/food/**",
+//            "/springboot/messages/**",
+//            "/springboot/orderFood/**",
+//            "/springboot/price/**",
+            "/springboot/**"
 
     };
 
     // 与登录和注册相关的界面和请求
     public static final String[] aboutLogin = {
-            "/springboot/user/login",
-            "/springboot/user/register"
+//            "/springboot/user/login",
+//            "/springboot/user/register"
+            "/springboot/**"
     };
 
     public static final String[] aboutUser = {
-            "/springboot/user/login",
-            "/springboot/user/register",
-            "/springboot/user/**"
+//            "/springboot/user/login",
+//            "/springboot/user/register",
+            "/springboot/**"
 
     };
 
     public static final String[] aboutCaterer= {
-            "/springboot/user/login",
-            "/springboot/user/register",
-            "/springboot/caterer/**"
+//            "/springboot/user/login",
+//            "/springboot/user/register",
+//            "/springboot/caterer/**"
+            "/springboot/**"
     };
 
 

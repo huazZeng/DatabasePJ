@@ -1,5 +1,6 @@
 package org.example.springboot.controller;
 
+import org.example.springboot.dto.CatererBrief;
 import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
@@ -34,5 +35,11 @@ public class CatererController {
 
     @GetMapping("/findDetailById")
     public CatererDetail findCaterDetailById(@RequestParam int id){return catererService.findCaterDetailById(id);}
+
+    @GetMapping("/findInterested")
+    public List<CatererBrief> findInterested(@RequestParam String search){return catererService.findInterested(search);}
+
+
+    @GetMapping("/findMy")
 
 }

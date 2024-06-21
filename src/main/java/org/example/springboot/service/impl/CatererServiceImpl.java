@@ -1,6 +1,7 @@
 package org.example.springboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.example.springboot.dto.CatererBrief;
 import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
@@ -11,6 +12,7 @@ import org.example.springboot.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +37,21 @@ FoodService foodService;
     }
 
     @Override
+    public List<CatererBrief> findInterested(String search) {
+        List<Caterer> caterers=findCaterBySearch(search);
+        List<CatererBrief> catererBriefs=new ArrayList<>();
+        for(Caterer caterer:caterers){
+            CatererBrief catererBrief =new CatererBrief();
+            catererBrief.setMainFoodName(foodService.findFoodDetailById(caterer.getMainFoodId()).getName());
+            catererBrief.setId(caterer.getId());
+            catererBrief.setName(caterer.getName());
+            catererBrief.setAddress(caterer.getAddress());
+            catererBriefs.add(catererBrief);
+        }
+        return catererBriefs;
+    }
+
+    @Override
     public Caterer findCaterById(int id) {
         return catererMapper.selectById(id);
     }
@@ -46,7 +63,6 @@ FoodService foodService;
         CatererDetail catererDetail=new CatererDetail();
         catererDetail.setId(caterer.getId());
         catererDetail.setName(caterer.getName());
-        catererDetail.setPassword(catererDetail.getPassword());
         catererDetail.setAddress(caterer.getAddress());
         catererDetail.setFoodList(foods);
         catererDetail.setMainFoodId(caterer.getMainFoodId());
