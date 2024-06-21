@@ -76,6 +76,9 @@ public class UserController {
         return userService.isLogin(request.getSession()).getMessage();
     }
 
-
+    @PostMapping("/get-my")
+    public User getMy(HttpServletRequest request){
+        return (User) request.getSession().getAttribute(UserController.SESSION_NAME);
+    }
 
 }
