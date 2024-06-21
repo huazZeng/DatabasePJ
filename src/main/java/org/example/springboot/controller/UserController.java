@@ -97,4 +97,11 @@ public class UserController {
         if (bookService.insert(book)) return "book success";
         else return "book failed";
     }
+
+    @GetMapping("/delete")
+    public boolean deleteuser(@RequestParam int userid){
+
+        return userService.delete(userid);
+
+    }
 }

@@ -113,4 +113,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return userMapper.getCollectAnalysis(id);
     }
 
+    @Override
+    public boolean delete(int userid) {
+        User user=userMapper.selectById(userid);
+        if (user.getType().equals("root")) {
+            return  false;
+        }
+        int row = userMapper.deleteById(userid);
+        return row>0;
+    }
+
 }

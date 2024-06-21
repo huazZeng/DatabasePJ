@@ -35,4 +35,6 @@ public interface UserService extends IService<User> {
     User getBySid(String s_id);
 
     List<CollectAnalysis> getCollectAnalysis(Integer id);
+
+    boolean delete(int userid);
 }

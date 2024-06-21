@@ -101,19 +101,6 @@ age INT,
 gender CHAR(1)
 );
 
-CREATE TABLE food (
-id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-caterer_id INT references caterer(id),
-name VARCHAR(255) NOT NULL,
-price DECIMAL(10, 2) NOT NULL,
-description TEXT,
-image_path VARCHAR(255) NOT NULL,
-ingredient VARCHAR(255) NOT NULL,
-nutrition VARCHAR(255) NOT NULL,
-allergen VARCHAR(255),
-type VARCHAR(32)
-);
-
 CREATE TABLE caterer (
 id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 name VARCHAR(32) NOT NULL,
@@ -122,6 +109,22 @@ address VARCHAR(255),
 main_food_name VARCHAR(255)
 );
 
+CREATE TABLE food (
+id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+caterer_id INT,
+name VARCHAR(255) NOT NULL,
+price DECIMAL(10, 2) NOT NULL,
+description TEXT,
+image_path VARCHAR(255) NOT NULL,
+ingredient VARCHAR(255) NOT NULL,
+nutrition VARCHAR(255) NOT NULL,
+allergen VARCHAR(255),
+type VARCHAR(32),
+FOREIGN KEY (caterer_id) REFERENCES caterer(id) ON DELETE CASCADE
+);
+
+
+
 
 
 CREATE TABLE book (
@@ -129,24 +132,24 @@ id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 user_id INT NOT NULL,
 caterer_id INT NOT NULL,
 time DATETIME NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (caterer_id) REFERENCES caterer(id)
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+FOREIGN KEY (caterer_id) REFERENCES caterer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE food_collect (
 user_id INT NOT NULL,
 food_id INT NOT NULL,
 PRIMARY KEY (user_id, food_id),
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (food_id) REFERENCES food(id)
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE
 );
 
 CREATE TABLE caterer_collect (
 user_id INT NOT NULL,
 caterer_id INT NOT NULL,
 PRIMARY KEY (user_id, caterer_id),
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (caterer_id) REFERENCES caterer(id)
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+FOREIGN KEY (caterer_id) REFERENCES caterer(id) ON DELETE CASCADE
 );
 
 
@@ -157,16 +160,17 @@ user_id INT NOT NULL,
 caterer_id INT NOT NULL,
 is_queue_order BOOLEAN NOT NULL,
 is_finished BOOLEAN NOT NULL DEFAULT FALSE,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (caterer_id) REFERENCES caterer(id)
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+FOREIGN KEY (caterer_id) REFERENCES caterer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE order_food (
 order_id INT NOT NULL,
 food_id INT NOT NULL,
+quantity INT NOT NULL,
 PRIMARY KEY (order_id, food_id),
-FOREIGN KEY (order_id) REFERENCES orders(id),
-FOREIGN KEY (food_id) REFERENCES food(id)
+FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE
 );
 
 CREATE TABLE price (
@@ -174,7 +178,7 @@ food_id INT NOT NULL,
 time DATETIME NOT NULL,
 price DECIMAL(10, 2) NOT NULL,
 PRIMARY KEY (food_id, time),
-FOREIGN KEY (food_id) REFERENCES food(id)
+FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE
 );
 
 
@@ -183,8 +187,8 @@ caterer_id INT NOT NULL,
 user_id INT NOT NULL,
 comment TEXT,
 grade INT,
-FOREIGN KEY (caterer_id) REFERENCES caterer(id),
-FOREIGN KEY (user_id) REFERENCES user(id)
+FOREIGN KEY (caterer_id) REFERENCES caterer(id) ON DELETE CASCADE,
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE food_comment(
@@ -192,8 +196,8 @@ food_id INT NOT NULL,
 user_id INT NOT NULL,
 comment TEXT,
 grade INT,
-FOREIGN KEY (food_id) REFERENCES food(id),
-FOREIGN KEY (user_id) REFERENCES user(id)
+FOREIGN KEY (food_id) REFERENCES food(id) ON DELETE CASCADE,
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE messages (
@@ -202,8 +206,8 @@ user_id INT NOT NULL,
 caterer_id INT NOT NULL,
 message_content TEXT NOT NULL,
 sent_time DATETIME NOT NULL,
-FOREIGN KEY (user_id) REFERENCES user(id),
-FOREIGN KEY (caterer_id) REFERENCES caterer(id)
+FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+FOREIGN KEY (caterer_id) REFERENCES caterer(id) ON DELETE CASCADE
 );
 
 
