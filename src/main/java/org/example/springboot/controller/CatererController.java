@@ -1,13 +1,12 @@
 package org.example.springboot.controller;
 
 import org.example.springboot.dto.CatererDetail;
+import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
-import org.example.springboot.entity.Food;
 import org.example.springboot.service.CatererService;
 import org.example.springboot.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
@@ -34,5 +33,8 @@ public class CatererController {
 
     @GetMapping("/findDetailById")
     public CatererDetail findCaterDetailById(@RequestParam int id){return catererService.findCaterDetailById(id);}
-
+    @GetMapping("/getAnlysis")
+    public List<Foodanalysis> getAnlysis(@RequestParam int id){
+        return catererService.getAnalysis(id);
+    }
 }

@@ -1,11 +1,13 @@
 package org.example.springboot.service;
 
+import org.example.springboot.dto.CollectAnalysis;
 import org.example.springboot.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.example.springboot.utils.JsonResult;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -32,5 +34,5 @@ public interface UserService extends IService<User> {
 
     User getBySid(String s_id);
 
-
+    List<CollectAnalysis> getCollectAnalysis(Integer id);
 }

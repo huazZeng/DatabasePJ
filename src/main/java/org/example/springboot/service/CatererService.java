@@ -1,9 +1,9 @@
 package org.example.springboot.service;
 
 import org.example.springboot.dto.CatererDetail;
+import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.example.springboot.entity.CatererCollect;
 
 import java.util.List;
 
@@ -25,4 +25,6 @@ public interface CatererService extends IService<Caterer> {
 
 
     boolean insert(Caterer caterer);
+
+    List<Foodanalysis> getAnalysis(int id);
 }

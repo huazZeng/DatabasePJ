@@ -28,4 +28,5 @@ public class CatererCollectController {
     public  boolean insertCatererCollect(@RequestBody CatererCollect catererCollect){
            return  catererCollectService.insert(catererCollect);
     }
+
 }

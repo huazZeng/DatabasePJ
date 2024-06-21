@@ -2,6 +2,7 @@ package org.example.springboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.example.springboot.dto.CatererDetail;
+import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
 import org.example.springboot.mapper.CatererMapper;
@@ -58,6 +59,12 @@ FoodService foodService;
         int rows = catererMapper.insert(caterer);
         // 返回操作结果
         return rows > 0;
+    }
+
+    @Override
+    public List<Foodanalysis> getAnalysis(int id) {
+        return catererMapper.getAnalysis(id);
+        
     }
 
 
