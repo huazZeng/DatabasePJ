@@ -1,5 +1,6 @@
 package org.example.springboot.service;
 
+import org.example.springboot.dto.CollectAnalysis;
 import org.example.springboot.dto.FoodDetail;
 import org.example.springboot.entity.Food;
 import com.baomidou.mybatisplus.extension.service.IService;

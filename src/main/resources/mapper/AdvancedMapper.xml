@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.springboot.mapper.UserMapper">
+<mapper namespace="org.example.springboot.mapper.AdvancedMapper">
     <select id="getCollectAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.CollectAnalysis">
         WITH FilteredOrders AS (
         SELECT
@@ -61,9 +61,29 @@
         LEFT JOIN
         SalesLastYear sy ON fc.food_id = sy.food_id
         WHERE
-        fc.user_id = {user_id}
+        fc.user_id = {id}
         ORDER BY
         fc.food_id;
+    </select>
+    <select id="getFoodanalysis" parameterType="Integer" resultType="org.example.springboot.dto.Foodanalysis">
+
+    </select>
+    <select id="getHabitAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.HabitAnalysis">
+
+    </select>
+
+
+    <select id="getAgeAnlysis"  resultType="org.example.springboot.dto.AgeAnalysis">
+    </select>
+    <select id="getRoleAnalysis"  resultType="org.example.springboot.dto.RoleAnalysis">
+    </select>
+    <select id="getGenderAnalysis"  resultType="org.example.springboot.dto.GenderAnalysis">
+    </select>
+    <select id="getHourluActivityDTO"  resultType="org.example.springboot.dto.HourlyActivityDTO">
+    </select>
+    <select id="getMonthlyOrderFrequencyDTO"  resultType="org.example.springboot.dto.MonthlyOrderFrequencyDTO">
+    </select>
+    <select id="getWeeklyOrder"  resultType="org.example.springboot.dto.WeeklyOrderFrequencyDTO">
 
     </select>
 </mapper>

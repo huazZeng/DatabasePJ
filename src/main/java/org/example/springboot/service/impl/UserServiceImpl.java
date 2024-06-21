@@ -1,6 +1,7 @@
 package org.example.springboot.service.impl;
 
 
+import org.example.springboot.dto.CollectAnalysis;
 import org.example.springboot.entity.Food;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -104,6 +106,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("s_id", s_id);
         return userMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public List<CollectAnalysis> getCollectAnalysis(Integer id) {
+        return userMapper.getCollectAnalysis(id);
     }
 
 }

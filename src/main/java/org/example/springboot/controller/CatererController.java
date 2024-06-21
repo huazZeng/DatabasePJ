@@ -2,6 +2,7 @@ package org.example.springboot.controller;
 
 import org.example.springboot.dto.CatererBrief;
 import org.example.springboot.dto.CatererDetail;
+import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
 import org.example.springboot.service.CatererService;
@@ -42,4 +43,8 @@ public class CatererController {
 
     @GetMapping("/findMy")
 
+    @GetMapping("/getAnlysis")
+    public List<Foodanalysis> getAnlysis(@RequestParam int id){
+        return catererService.getAnalysis(id);
+    }
 }
