@@ -17,7 +17,14 @@ public class AdvancedController {
     AdvancedMapper advancedMapper;
     @GetMapping("/Foodanalysis")
     public List<Foodanalysis> getFoodanalysis(@RequestParam Integer id){
-            return advancedMapper.getFoodanalysis(id);
+        Foodanalysis foodanalysis =new Foodanalysis();
+        List<Foodanalysis> data = advancedMapper.getFoodanalysis(id);
+
+        for (Foodanalysis F:
+                data) {
+
+
+        }
     }
     @GetMapping("/CollectAnalysis")
     public List<CollectAnalysis> getCollectAnalysis(@RequestParam Integer id){

@@ -18,23 +18,53 @@
     </select>
 
     <select id="getFoodanalysis" parameterType="Integer" resultType="org.example.springboot.dto.Foodanalysis">
-        SELECT f.name AS foodName,
-        AVG(fc.grade) AS avgGrade,
+        WITH food_sales AS (
+        SELECT
+        f.id AS id,
+        f.name AS foodName,
         COUNT(ofd.food_id) AS saleCount,
-        u.name AS personBuyMost
+        u.name AS personBuyMost,
+        ROW_NUMBER() OVER (PARTITION BY f.id ORDER BY COUNT(ofd.food_id) DESC) AS rn
         FROM food f
-        LEFT JOIN food_comment fc ON f.id = fc.food_id
         LEFT JOIN order_food ofd ON f.id = ofd.food_id
         LEFT JOIN orders o ON ofd.order_id = o.id
         LEFT JOIN user u ON o.user_id = u.id
         WHERE f.caterer_id = #{id}
-        GROUP BY f.id, u.name
-        ORDER BY f.name;
-
-
+        GROUP BY f.id, foodName, personBuyMost  -- 修改这里，使用实际的列名或索引位置
+        ),
+        foodSaleCount AS (
+        SELECT
+        f.id AS id,
+        f.name AS foodName,
+        COUNT(ofd.food_id) AS saleCount
+        FROM food f
+        LEFT JOIN order_food ofd ON f.id = ofd.food_id
+        WHERE f.caterer_id = #{id}
+        GROUP BY f.id, f.name  -- 修改这里，使用实际的列名或索引位置
+        ),
+        FoodGrade AS (
+        SELECT
+        f.id AS id,
+        f.name AS foodName,
+        AVG(fc.grade) AS avgGrade
+        FROM food f
+        LEFT JOIN food_comment fc ON f.id = fc.food_id
+        WHERE f.caterer_id = #{id}
+        GROUP BY f.id, f.name  -- 修改这里，使用实际的列名或索引位置
+        )
+        SELECT
+        food_sales.id AS id,
+        food_sales.foodName AS foodName,
+        FoodGrade.avgGrade AS avgGrade,
+        foodSaleCount.saleCount AS saleCount,
+        food_sales.personBuyMost AS personBuyMost
+        FROM food_sales
+        JOIN foodSaleCount ON food_sales.id = foodSaleCount.id
+        JOIN FoodGrade ON food_sales.id = FoodGrade.id
+        WHERE food_sales.rn = 1
+        ORDER BY foodSaleCount.saleCount DESC;
 
     </select>
-
 
 
     <select id="getHabitAnalysis" parameterType="Integer" resultType="org.example.springboot.dto.HabitAnalysis">

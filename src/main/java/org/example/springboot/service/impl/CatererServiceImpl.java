@@ -7,7 +7,6 @@ import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
-import org.example.springboot.entity.OrderFood;
 import org.example.springboot.mapper.CatererMapper;
 import org.example.springboot.mapper.FoodMapper;
 import org.example.springboot.service.CatererService;
@@ -116,6 +115,36 @@ FoodService foodService;
                 .eq("caterer_id", catererId);
         Long count = foodMapper.selectCount(queryWrapper);
         return count > 0;
+    }
+
+    @Override
+    public boolean delete(int catererId) {
+        int row=catererMapper.deleteById(catererId);
+        return  row>0;
+    }
+
+    @Override
+    public Caterer getCatererById(Integer id) {
+        return catererMapper.selectById(id);
+    }
+
+    @Override
+    public boolean updatecaterer(Caterer caterer) {
+        Caterer currentUser = getCatererById(caterer.getId());
+        if (currentUser == null) {
+            // 如果找不到对应的 Food 实例，返回 false
+            return false;
+        }
+        currentUser.setName(caterer.getName());
+        currentUser.setPassword(caterer.getPassword());
+        currentUser.setId(caterer.getId());
+        currentUser.setMainFoodName(caterer.getMainFoodName());
+        currentUser.setAddress(caterer.getAddress());
+        // 保存更新后的 Food 实例到数据库
+        int rows = catererMapper.updateById(currentUser);
+
+        // 返回操作结果
+        return rows > 0;
     }
 
 

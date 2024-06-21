@@ -113,4 +113,26 @@ public class CatererController {
         if(ordersService.complecterId(orderId)) return "order completed";
         else return "failed";
     }
+
+    @GetMapping("/delete")
+    public boolean deleteCaterer(@RequestParam int catererif){
+
+        return catererService.delete(catererif);
+
+    }
+
+    @PostMapping("/update")
+    public boolean UpdateCaterer(@RequestBody Caterer caterer){
+        Caterer currentUser = catererService.getCatererById(caterer.getId());
+        if (currentUser == null) {
+            // 如果找不到对应的用户，返回 false
+            return false;
+        }
+        // 更新用户信息
+        boolean isUpdated = catererService.updatecaterer(caterer);
+        // 返回操作结果
+        return isUpdated;
+    }
+
+
 }

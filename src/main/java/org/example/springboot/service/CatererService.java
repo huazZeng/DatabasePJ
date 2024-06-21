@@ -38,4 +38,9 @@ public interface CatererService extends IService<Caterer> {
 
     boolean hasFood(int id,int catererId);
 
+    boolean delete(int catererId);
+
+    Caterer getCatererById(Integer id);
+
+    boolean updatecaterer(Caterer caterer);
 }
