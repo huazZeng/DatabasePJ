@@ -1,17 +1,23 @@
 package org.example.springboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.example.springboot.dto.CatererBrief;
 import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
+import org.example.springboot.entity.OrderFood;
 import org.example.springboot.mapper.CatererMapper;
+import org.example.springboot.mapper.FoodMapper;
 import org.example.springboot.service.CatererService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.example.springboot.service.FoodService;
+import org.example.springboot.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,12 +33,29 @@ public class CatererServiceImpl extends ServiceImpl<CatererMapper, Caterer> impl
 @Autowired
 CatererMapper catererMapper;
 @Autowired
+FoodMapper foodMapper;
+@Autowired
 FoodService foodService;
     @Override
     public List<Caterer> findCaterBySearch(String search) {
         LambdaQueryWrapper<Caterer> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.like(Caterer::getName, search);
         return catererMapper.selectList(lambdaQueryWrapper);
+    }
+
+    @Override
+    public List<CatererBrief> findInterested(String search) {
+        List<Caterer> caterers=findCaterBySearch(search);
+        List<CatererBrief> catererBriefs=new ArrayList<>();
+        for(Caterer caterer:caterers){
+            CatererBrief catererBrief =new CatererBrief();
+            catererBrief.setMainFoodName(caterer.getMainFoodName());
+            catererBrief.setId(caterer.getId());
+            catererBrief.setName(caterer.getName());
+            catererBrief.setAddress(caterer.getAddress());
+            catererBriefs.add(catererBrief);
+        }
+        return catererBriefs;
     }
 
     @Override
@@ -47,10 +70,9 @@ FoodService foodService;
         CatererDetail catererDetail=new CatererDetail();
         catererDetail.setId(caterer.getId());
         catererDetail.setName(caterer.getName());
-        catererDetail.setPassword(catererDetail.getPassword());
         catererDetail.setAddress(caterer.getAddress());
         catererDetail.setFoodList(foods);
-        catererDetail.setMainFoodId(caterer.getMainFoodId());
+        catererDetail.setMainFoodName(caterer.getMainFoodName());
         return catererDetail;
     }
 
@@ -64,8 +86,40 @@ FoodService foodService;
     @Override
     public List<Foodanalysis> getAnalysis(int id) {
         return catererMapper.getAnalysis(id);
-        
+
+    }
+
+    @Override
+    public JsonResult<Caterer> login(String name, String password) {
+        Caterer caterer=getByName(name);
+        if (caterer==null){
+            return new JsonResult<>(0,"caterer not exits");
+        }
+        if (!caterer.getPassword().equals(password)){
+            return new JsonResult<>(0,"wrong password");
+        }
+        return new JsonResult<>(1,"login success",caterer);
+    }
+
+
+    @Override
+    public Caterer getByName(String name) {
+        QueryWrapper<Caterer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("name", name);
+        return catererMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public boolean hasFood(int id, int catererId) {
+        QueryWrapper<Food> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", id)
+                .eq("caterer_id", catererId);
+        Long count = foodMapper.selectCount(queryWrapper);
+        return count > 0;
     }
 
 
 }
+
+
+

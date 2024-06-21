@@ -136,4 +136,10 @@ public class FoodServiceImpl extends ServiceImpl<FoodMapper, Food> implements Fo
         return rows > 0;
     }
 
+    @Override
+    public boolean insertFood(Food food) {
+
+        return foodMapper.insert(food)>0;
+    }
+
 }

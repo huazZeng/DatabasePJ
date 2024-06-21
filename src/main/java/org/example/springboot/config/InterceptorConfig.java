@@ -19,13 +19,14 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //            "/springboot/messages/**",
 //            "/springboot/orderFood/**",
 //            "/springboot/price/**",
-//            "/springboot/user/**"
+
             "/springboot/**"
 
     };
 
     // 与登录和注册相关的界面和请求
     public static final String[] aboutLogin = {
+
 //            "/springboot/user/login",
 //            "/springboot/user/register"
             "/springboot/**"
@@ -44,7 +45,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //            "/springboot/caterer/**"
             "/springboot/**"
     };
-
 
 
     @Override

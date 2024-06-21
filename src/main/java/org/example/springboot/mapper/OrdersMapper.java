@@ -1,5 +1,6 @@
 package org.example.springboot.mapper;
 
+import org.apache.ibatis.annotations.Select;
 import org.example.springboot.entity.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -12,5 +13,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2024-05-31
  */
 public interface OrdersMapper extends BaseMapper<Orders> {
+
+    @Select("SELECT MAX(id) FROM orders")
+    int selectMaxId();
+
 
 }

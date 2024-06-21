@@ -49,7 +49,7 @@ public class UserController {
         // 返回操作结果
         return isUpdated;
     }
-    @PostMapping("/insert")
+    @PostMapping("/root/insert")
     public boolean InsertUser(@RequestBody User user){
         boolean isInserted = userService.insert(user);
         // 返回操作结果
@@ -76,5 +76,9 @@ public class UserController {
         return userService.isLogin(request.getSession()).getMessage();
     }
 
+    @PostMapping("/get-my")
+    public User getMy(HttpServletRequest request){
+        return (User) request.getSession().getAttribute(UserController.SESSION_NAME);
+    }
 
 }

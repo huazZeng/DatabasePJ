@@ -28,5 +28,5 @@ public class Caterer implements Serializable {
 
     private String address;
 
-    private Integer mainFoodId;
+    private String mainFoodName;
 }
