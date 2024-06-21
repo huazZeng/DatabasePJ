@@ -1,11 +1,21 @@
-id,name,password,address
-1,Happy Meals,password111,123 Elm Street
-2,Green Veggie Delight,password222,456 Oak Avenue
-3,Delicious Bites,password333,789 Maple Road
-4,Tasty Treats,password444,101 Pine Lane
-5,Healthy Eats,password555,202 Cedar Boulevard
-6,Yummy Foods,password666,303 Birch Street
-7,Savory Snacks,password777,404 Spruce Drive
-8,Gourmet Goods,password888,505 Fir Court
-9,Food Fiesta,password999,606 Redwood Parkway
-10,Quick Nibble,password000,707 Willow Way
+id,name,password,address,main_food_name
+1,Centizu,jY5>Q6c\8.?S,5 Maywood Way,taco
+2,Yakidoo,jT4&W.FIFbey~Q,008 International Circle,salad
+3,Vipe,zT6&u<'W,21322 Lotheville Center,pasta
+4,Brainlounge,jM3@lnTI#uAdP.,1 Donald Court,burrito
+5,Trunyx,rP4%zJ<P,56957 Bluejay Drive,steak
+6,Realbuzz,"fH7,!Ua#@a6@",20 Esker Court,taco
+7,Eimbee,eN0?zM*f`9Wy,0521 Chive Circle,sushi
+8,Youbridge,fZ4(6uNy,5 Mendota Plaza,taco
+9,Topicware,"yI4""2\79",9 Oxford Avenue,sandwich
+10,Dynava,"mB6/*y5@LTj""zl8=",4576 Trailsway Street,sandwich
+11,Linkbuzz,eY7%7k{},33925 Johnson Drive,sushi
+12,Feedspan,"cT3,lz0v=,.",0 Anthes Terrace,soup
+13,Voomm,yX6_d<4dp<37,130 Melody Crossing,pasta
+14,Zoomdog,dZ4<=tLZ7VlN{,404 Lindbergh Circle,sushi
+15,Twiyo,xB0.u$%kqXq8,431 Warner Avenue,burger
+16,Edgetag,"kR9,71,U_P",9 Chive Point,burger
+17,Quamba,sW9>9=`h,5835 Dixon Plaza,pizza
+18,Feedspan,jY0.CK?n+,170 Division Avenue,burger
+19,Tagcat,"uK1\'@c"",`go",83 Ridgeview Park,sandwich
+20,Skiptube,qK0'L!B6pD<.,0 Graedel Point,burger
