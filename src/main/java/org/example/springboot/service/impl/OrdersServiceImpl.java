@@ -1,6 +1,8 @@
 package org.example.springboot.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.example.springboot.dto.OrderDetail;
 import org.example.springboot.entity.Food;
 import org.example.springboot.entity.Orders;
@@ -84,5 +86,13 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         Orders orders=ordersMapper.selectById(orderId);
         orders.setIsFinished(true);
         return ordersMapper.updateById(orders)>0;
+    }
+
+    @Override
+    public IPage<Orders> getOrdersByPage(int pageNumber, int pageSize) {
+        Page<Orders> page = new Page<>(pageNumber, pageSize);
+
+        // 执行查询，MyBatis-Plus 会自动进行分页
+        return ordersMapper.selectPage(page, null);
     }
 }

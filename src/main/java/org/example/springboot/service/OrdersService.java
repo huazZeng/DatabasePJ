@@ -1,5 +1,6 @@
 package org.example.springboot.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.example.springboot.dto.OrderDetail;
 import org.example.springboot.entity.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -27,4 +28,6 @@ public interface OrdersService extends IService<Orders> {
     List<OrderDetail> findDetailOrdersByUserId(int myId);
 
     boolean complecterId(int orderId);
+
+    IPage<Orders> getOrdersByPage(int pageNumber, int pageSize);
 }

@@ -1,5 +1,6 @@
 package org.example.springboot.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import org.example.springboot.dto.OrderDetail;
 import org.example.springboot.entity.Caterer;
@@ -77,5 +78,12 @@ public class OrdersController {
     @GetMapping("/findByUserId")
     public List<Orders> findOrdersByUserId(@RequestParam int userId){return ordersService.findOrdersByUserId(userId);}
 
+
+    @GetMapping("/getOrdersByPage")
+    public IPage<Orders> getUsersByPage(
+            @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
+            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+        return ordersService.getOrdersByPage(pageNumber, pageSize);
+    }
 
 }
