@@ -5,9 +5,11 @@ import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
+import org.example.springboot.entity.Orders;
 import org.example.springboot.entity.User;
 import org.example.springboot.service.CatererService;
 import org.example.springboot.service.FoodService;
+import org.example.springboot.service.OrdersService;
 import org.example.springboot.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,9 @@ public class CatererController {
     FoodService foodService;
     @Autowired
     CatererService catererService;
+    @Autowired
+    OrdersService ordersService;
+
     @GetMapping("/findBySearch")//2.a&b 这样返回的是全部内容。2个选择：1创建DTO对象 2前端选择性展示
     public List<Caterer> findCaterBySearch(@RequestParam String search){return catererService.findCaterBySearch(search);}
 
@@ -95,5 +100,17 @@ public class CatererController {
         if (!hasFood) return "你的菜单没有这个菜";
         if (foodService.updateFoodType(food)) return "类型成功更新";
         else return "类型更新失败";
+    }
+
+    @GetMapping("/findMyOrder")
+    public List<Orders> findOrdersForMe(HttpServletRequest request){
+        Caterer caterer=(Caterer)request.getSession().getAttribute(UserController.SESSION_NAME);
+        return ordersService.findOrdersByCatererId(caterer.getId());
+    }
+
+    @GetMapping("/completeOrder")
+    public String completeOrder(@RequestParam int orderId){
+        if(ordersService.complecterId(orderId)) return "order completed";
+        else return "failed";
     }
 }

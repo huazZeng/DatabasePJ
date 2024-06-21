@@ -65,9 +65,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
             "/springboot/caterer/find-my",
             "/springboot/caterer/insert",
             "/springboot/caterer/change-price",
+            "/springboot/caterer/completeOrder",
             "/springboot/caterer/change-type",
-//            "/springboot/caterer/**",
-            "/springboot/user/login"
+            "/springboot/caterer/findMyOrder",
+            "/springboot/user/login",
+
 //            "/springboot/**"
     };
 

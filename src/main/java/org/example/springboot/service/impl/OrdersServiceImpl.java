@@ -44,6 +44,13 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     }
 
     @Override
+    public List<Orders> findOrdersByCatererId(int catererId) {
+        LambdaQueryWrapper<Orders> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Orders::getCatererId, catererId);
+        return ordersMapper.selectList(lambdaQueryWrapper);
+    }
+
+    @Override
     public int getInsertId() {
         return ordersMapper.selectMaxId();
     }
@@ -69,5 +76,13 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
 
         return orderDetails;
+    }
+
+
+    @Override
+    public boolean complecterId(int orderId) {
+        Orders orders=ordersMapper.selectById(orderId);
+        orders.setIsFinished(true);
+        return ordersMapper.updateById(orders)>0;
     }
 }

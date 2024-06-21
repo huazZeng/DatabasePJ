@@ -20,7 +20,11 @@ public interface OrdersService extends IService<Orders> {
 
     List<Orders> findOrdersByUserId(int userId);
 
+    List<Orders> findOrdersByCatererId(int catererId);
+
     int getInsertId();
 
     List<OrderDetail> findDetailOrdersByUserId(int myId);
+
+    boolean complecterId(int orderId);
 }

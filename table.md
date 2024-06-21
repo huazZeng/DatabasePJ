@@ -281,3 +281,20 @@ DECLARE caterer_name VARCHAR(255);
 END;
 $$
 DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE TRIGGER after_food_price_update
+AFTER UPDATE ON food
+FOR EACH ROW
+BEGIN
+-- Check if the price has changed
+IF OLD.price <> NEW.price THEN
+-- Insert the new price record into the price table
+INSERT INTO price (food_id, time, price)
+VALUES (NEW.id, NOW(), NEW.price);
+END IF;
+END$$
+
+DELIMITER ;
