@@ -100,8 +100,9 @@ s_id VARCHAR(32) NOT NULL,
 age INT,
 gender CHAR(1)
 );
+
 CREATE TABLE food (
-id INT PRIMARY KEY NOT NULL,
+id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 caterer_id INT references caterer(id),
 name VARCHAR(255) NOT NULL,
 price DECIMAL(10, 2) NOT NULL,
@@ -112,19 +113,19 @@ nutrition VARCHAR(255) NOT NULL,
 allergen VARCHAR(255),
 type VARCHAR(32)
 );
+
 CREATE TABLE caterer (
-id INT PRIMARY KEY NOT NULL,
+id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 name VARCHAR(32) NOT NULL,
 password VARCHAR(32) NOT NULL,
 address VARCHAR(255),
-main_food_id INT NOT NULL,
-FOREIGN KEY (main_food_id) REFERENCES food(id)
+main_food_name VARCHAR(255)
 );
 
 
 
 CREATE TABLE book (
-id INT PRIMARY KEY NOT NULL,
+id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 user_id INT NOT NULL,
 caterer_id INT NOT NULL,
 time DATETIME NOT NULL,
@@ -150,7 +151,7 @@ FOREIGN KEY (caterer_id) REFERENCES caterer(id)
 
 
 CREATE TABLE orders(
-id INT PRIMARY KEY NOT NULL,
+id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 time DATETIME NOT NULL,
 user_id INT NOT NULL,
 caterer_id INT NOT NULL,
@@ -234,9 +235,10 @@ DELIMITER $$
 CREATE TRIGGER order_finished_message AFTER UPDATE ON orders
 FOR EACH ROW
 BEGIN
-IF OLD.is_finished = 0 AND NEW.is_finished = 1 THEN
 DECLARE user_name VARCHAR(255);
 DECLARE caterer_name VARCHAR(255);
+IF OLD.is_finished = 0 AND NEW.is_finished = 1 THEN
+
 
         -- 获取用户名称
         SELECT name INTO user_name FROM user WHERE id = NEW.user_id;

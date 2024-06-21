@@ -5,13 +5,18 @@ import org.example.springboot.dto.CatererDetail;
 import org.example.springboot.dto.Foodanalysis;
 import org.example.springboot.entity.Caterer;
 import org.example.springboot.entity.Food;
+import org.example.springboot.entity.User;
 import org.example.springboot.service.CatererService;
 import org.example.springboot.service.FoodService;
+import org.example.springboot.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
+import static org.example.springboot.controller.UserController.SESSION_NAME;
 
 /**
  * <p>
@@ -41,10 +46,54 @@ public class CatererController {
     public List<CatererBrief> findInterested(@RequestParam String search){return catererService.findInterested(search);}
 
 
-    @GetMapping("/findMy")
+    @GetMapping("/find-my")
+    public CatererDetail findMy(HttpServletRequest request){
+        Caterer caterer=(Caterer)request.getSession().getAttribute(UserController.SESSION_NAME);
+        return catererService.findCaterDetailById(caterer.getId());
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String name, @RequestParam String password, HttpServletRequest request) {
+        JsonResult<Caterer> result;
+        result=catererService.login(name,password);
+        if (result.getState()==1){
+            request.getSession().setAttribute(SESSION_NAME,result.getData());
+        }
+        return result.getMessage();
+    }
+
+
 
     @GetMapping("/getAnlysis")
     public List<Foodanalysis> getAnlysis(@RequestParam int id){
         return catererService.getAnalysis(id);
+    }
+
+    @PostMapping("/insert")
+    public String insertFood(@RequestBody Food food,HttpServletRequest request){
+        Caterer caterer=(Caterer)request.getSession().getAttribute(UserController.SESSION_NAME);
+//        boolean hasFood=catererService.hasFood(food.getId(),caterer.getId());
+//        if (hasFood) return "已有此"
+        food.setCatererId(caterer.getId());
+        if (foodService.insertFood(food))return "插入成功";
+        else return "插入失败";
+    }
+
+    @PostMapping("/change-price")
+    public String changePrice(@RequestBody Food food,HttpServletRequest request){
+        Caterer caterer=(Caterer)request.getSession().getAttribute(UserController.SESSION_NAME);
+        boolean hasFood=catererService.hasFood(food.getId(),caterer.getId());
+        if (!hasFood) return "你的菜单没有这个菜";
+        if (foodService.updateFoodPrice(food)) return "价格成功更新";
+        else return "价格更新失败";
+    }
+
+    @PostMapping("/change-type")
+    public String changeType(@RequestBody Food food,HttpServletRequest request){
+        Caterer caterer=(Caterer)request.getSession().getAttribute(UserController.SESSION_NAME);
+        boolean hasFood=catererService.hasFood(food.getId(),caterer.getId());
+        if (!hasFood) return "你的菜单没有这个菜";
+        if (foodService.updateFoodType(food)) return "类型成功更新";
+        else return "类型更新失败";
     }
 }

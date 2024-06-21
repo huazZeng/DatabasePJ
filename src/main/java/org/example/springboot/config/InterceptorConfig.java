@@ -25,23 +25,49 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     // 与登录和注册相关的界面和请求
     public static final String[] aboutLogin = {
-//            "/springboot/user/login",
-//            "/springboot/user/register"
-            "/springboot/**"
+            "/springboot/user/login",
+            "/springboot/user/register",
+            "/springboot/caterer/login"
+
+//            "/springboot/**"
     };
 
     public static final String[] aboutUser = {
 //            "/springboot/user/login",
-//            "/springboot/user/register",
-            "/springboot/**"
+            "/springboot/user/**",
+            "/springboot/caterer/login",
+            "/springboot/user/update",
+            "/springboot/user/login",
+            "/springboot/user/get-my",
+            "/springboot/caterer/login",
+            "/springboot/caterer/findInterested",
+            "/springboot/caterer/findDetailById",
+            "/springboot/catererComment/findDetailById",
+            "/springboot/food/searchInterestedFoodsInCaterer",
+            "/springboot/food/findDetailById",
+            "/springboot/orders/**",
+            "/springboot/foodCollect/**",
+            "/springboot/catererCollect/**",
+            "/springboot/messages/find-my",
+            "/springboot/catererComment/**",
+            "/springboot/foodComment/**",
+
+
+//            "/springboot/**"
 
     };
 
     public static final String[] aboutCaterer= {
 //            "/springboot/user/login",
 //            "/springboot/user/register",
-//            "/springboot/caterer/**"
-            "/springboot/**"
+            "/springboot/caterer/login",
+            "/springboot/caterer/find-my",
+            "/springboot/caterer/insert",
+            "/springboot/caterer/change-price",
+            "/springboot/caterer/change-type",
+//            "/springboot/caterer/**",
+            "/springboot/user/login"
+//            "/springboot/**"
     };
 
 

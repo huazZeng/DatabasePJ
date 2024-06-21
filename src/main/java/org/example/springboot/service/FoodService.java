@@ -29,4 +29,6 @@ public interface FoodService extends IService<Food> {
     boolean deleteFood(Food food);
 
     boolean updateFoodType(Food food);
+
+    boolean insertFood(Food food);
 }

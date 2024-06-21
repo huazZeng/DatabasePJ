@@ -13,9 +13,8 @@ public class CatererDetail {
 
     private String address;
 
-    private Integer mainFoodId;
+    private String mainFoodName;
 
     private List<Food> foodList;
-
 
 }
