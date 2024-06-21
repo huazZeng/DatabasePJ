@@ -120,24 +120,22 @@
         ORDER BY
         u.gender;
     </select>
-    <select id="getHourlyActivityDTO"  resultType="org.example.springboot.dto.HourlyActivityDTO">
+    <select id="getHourluActivityDTO"  resultType="org.example.springboot.dto.HourlyActivityDTO">
         SELECT
-        o.user_id AS userId,
         HOUR(o.time) AS hourOfDay,
         COUNT(*) AS orderCount
         FROM
         orders o
         WHERE
-        o.time >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+        o.time >= DATE_SUB(NOW(), INTERVAL 100 DAY)
         GROUP BY
-        userId, hourOfDay
+         hourOfDay
         ORDER BY
-        userId, hourOfDay;
+        hourOfDay;
 
     </select>
     <select id="getMonthlyOrderFrequencyDTO"  resultType="org.example.springboot.dto.MonthlyOrderFrequencyDTO">
         SELECT
-        o.user_id AS userId,
         DATE_FORMAT(o.time, '%Y-%m') AS month,
         COUNT(*) AS orderCount
         FROM
@@ -145,15 +143,12 @@
         WHERE
         o.time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
         GROUP BY
-        userId, month
+        month
         ORDER BY
-        userId, month;
-
-
+         month;
     </select>
     <select id="getWeeklyOrder"  resultType="org.example.springboot.dto.WeeklyOrderFrequencyDTO">
         SELECT
-        o.user_id AS userId,
         DATE_FORMAT(o.time, '%x-%v') AS week,
         COUNT(*) AS orderCount
         FROM
@@ -161,12 +156,12 @@
         WHERE
         o.time >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
         GROUP BY
-        userId, week
+        week
         ORDER BY
-        userId, week;
+        week;
     </select>
 
-    <select id="getAgeOrderAnlysis"  resultType="org.example.springboot.dto.AgeOrderAnalysis">
+    <select id="getAgeOrderAnalysis"  resultType="org.example.springboot.dto.AgeOrderAnalysis">
         SELECT
         CASE
         WHEN u.age BETWEEN 0 AND 17 THEN '0-17'
@@ -177,7 +172,6 @@
         WHEN u.age >= 55 THEN '55+'
         ELSE 'Unknown'
         END AS ageGroup,
-        o.caterer_id AS catererId,
         COUNT(o.id) AS count
         FROM
         user u
@@ -186,40 +180,38 @@
         WHERE
         u.age IS NOT NULL
         GROUP BY
-        ageGroup, catererId
+        ageGroup
         ORDER BY
-        catererId, ageGroup;
+         ageGroup;
 
     </select>
 
     <select id="getRoleOrderAnalysis"  resultType="org.example.springboot.dto.RoleOrderAnalysis">
         SELECT
         u.type AS role,
-        o.caterer_id AS catererId,
         COUNT(o.id) AS count
         FROM
         user u
         JOIN
         orders o ON u.id = o.user_id
         GROUP BY
-        role, catererId
+        role
         ORDER BY
-        catererId, role;
+        role;
     </select>
 
     <select id="getGenderOrderAnalysis"  resultType="org.example.springboot.dto.GenderOrderAnalysis">
         SELECT
         u.gender AS gender,
-        o.caterer_id AS catererId,
         COUNT(o.id) AS count
         FROM
         user u
         JOIN
         orders o ON u.id = o.user_id
         GROUP BY
-        gender, catererId
+        gender
         ORDER BY
-        catererId, gender;
+        gender;
 
     </select>
 

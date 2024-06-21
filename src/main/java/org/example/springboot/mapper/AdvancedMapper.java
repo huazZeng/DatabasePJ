@@ -9,7 +9,7 @@ public interface AdvancedMapper {
 
     List<CollectAnalysis> getCollectAnalysis(Integer id);
 
-    List<AgeCommentAnalysis> getAgeAnlysis();
+    List<AgeCommentAnalysis> getAgeAnalysis();
 
     List<RoleCommentAnalysis> getRoleAnalysis();
 

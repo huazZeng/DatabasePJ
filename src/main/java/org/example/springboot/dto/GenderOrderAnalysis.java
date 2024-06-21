@@ -5,6 +5,5 @@ import lombok.Data;
 public class GenderOrderAnalysis {
     private String Gender;
 
-    private Integer Cartererid;
     private Integer count;
 }

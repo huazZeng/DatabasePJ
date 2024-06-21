@@ -5,6 +5,5 @@ import lombok.Data;
 public class RoleOrderAnalysis {
     private String Role;
 
-    private Integer Cartererid;
     private Integer count;
 }

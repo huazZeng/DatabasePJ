@@ -26,7 +26,7 @@ public class AdvancedController {
     }
     @GetMapping("/AgeCommentAnalysis")
     public  List<AgeCommentAnalysis> getAgeCommentAnlysis(){
-        return advancedMapper.getAgeAnlysis();
+        return advancedMapper.getAgeAnalysis();
     }
     @GetMapping("/RoleCommentAnalysis")
     public  List<RoleCommentAnalysis> getRoleCommentAnalysis(){
@@ -44,6 +44,8 @@ public class AdvancedController {
     public  List<RoleOrderAnalysis> getRoleOrderAnalysis(){
         return advancedMapper.getRoleOrderAnalysis();
     }
+
+    //fix
     @GetMapping("/GenderOrderAnalysis")
     public List<GenderOrderAnalysis> getGenderOrderAnalysis(){
         return advancedMapper.getGenderOrderAnalysis();
