@@ -257,3 +257,44 @@ END;
 $$
 $$
 DELIMITER ;
+
+
+DELIMITER $$
+CREATE TRIGGER insert_book_message AFTER INSERT ON book
+FOR EACH ROW
+BEGIN
+DECLARE user_name VARCHAR(255);
+DECLARE caterer_name VARCHAR(255);
+
+    -- 获取用户名称
+    SELECT name INTO user_name FROM user WHERE id = NEW.user_id;
+
+    -- 获取餐厅名称
+    SELECT name INTO caterer_name FROM caterer WHERE id = NEW.caterer_id;
+
+    -- 构造消息内容
+    SET @message_content = CONCAT('User ', user_name, ' book an order with caterer ', caterer_name);
+
+    -- 插入消息记录
+    INSERT INTO messages (user_id, caterer_id, message_content, sent_time)
+    VALUES (NEW.user_id, NEW.caterer_id, @message_content, NOW());
+END;
+$$
+DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE TRIGGER after_food_price_update
+AFTER UPDATE ON food
+FOR EACH ROW
+BEGIN
+-- Check if the price has changed
+IF OLD.price <> NEW.price THEN
+-- Insert the new price record into the price table
+INSERT INTO price (food_id, time, price)
+VALUES (NEW.id, NOW(), NEW.price);
+END IF;
+END$$
+
+DELIMITER ;
