@@ -1,0 +1,201 @@
+food_id,user_id,comment,grade
+25,42,Great job!,2
+44,20,Impressive!,3
+29,9,Great job!,2
+12,20,Nice work!,5
+39,6,Nice work!,3
+49,5,Well done!,0
+11,39,Well done!,5
+46,15,Nice work!,3
+20,16,Keep it up!,3
+44,27,Great job!,3
+25,42,Well done!,0
+42,4,Great job!,4
+1,30,Great job!,3
+36,36,Keep it up!,0
+30,34,Nice work!,3
+3,22,Nice work!,0
+38,33,Keep it up!,0
+33,23,Well done!,5
+13,26,Great job!,3
+24,11,Impressive!,2
+24,35,Nice work!,1
+11,1,Well done!,0
+47,13,Nice work!,5
+34,47,Well done!,0
+42,1,Well done!,1
+38,30,Impressive!,1
+30,16,Great job!,1
+26,35,Nice work!,3
+38,50,Great job!,0
+46,49,Keep it up!,2
+37,5,Nice work!,4
+30,25,Nice work!,1
+47,20,Impressive!,0
+36,6,Impressive!,5
+34,29,Nice work!,3
+40,16,Impressive!,5
+9,18,Nice work!,5
+2,49,Nice work!,2
+38,42,Impressive!,1
+14,14,Nice work!,1
+31,33,Well done!,2
+10,44,Impressive!,5
+35,15,Keep it up!,0
+22,27,Nice work!,1
+12,47,Nice work!,5
+24,33,Well done!,0
+27,11,Keep it up!,0
+41,30,Keep it up!,0
+50,43,Well done!,2
+21,5,Great job!,3
+1,33,Keep it up!,1
+28,39,Impressive!,3
+39,15,Keep it up!,1
+30,32,Nice work!,4
+48,12,Impressive!,4
+16,33,Impressive!,5
+44,18,Keep it up!,5
+15,5,Great job!,4
+50,20,Great job!,2
+17,26,Impressive!,3
+16,9,Impressive!,4
+27,50,Keep it up!,3
+34,49,Nice work!,1
+1,26,Well done!,1
+39,14,Impressive!,5
+2,6,Impressive!,2
+27,38,Nice work!,0
+3,17,Well done!,0
+46,48,Well done!,3
+30,1,Great job!,2
+2,45,Nice work!,1
+15,45,Well done!,1
+29,44,Impressive!,2
+31,35,Nice work!,3
+23,50,Great job!,3
+31,17,Impressive!,5
+21,33,Impressive!,5
+48,37,Great job!,4
+12,6,Nice work!,1
+27,2,Well done!,1
+26,50,Keep it up!,3
+46,32,Nice work!,1
+2,32,Well done!,3
+44,20,Great job!,5
+1,15,Well done!,1
+8,29,Great job!,3
+28,48,Well done!,4
+2,46,Impressive!,1
+21,45,Keep it up!,0
+42,39,Impressive!,4
+25,49,Nice work!,5
+17,8,Impressive!,2
+20,20,Great job!,4
+28,15,Great job!,3
+25,14,Great job!,0
+36,41,Great job!,2
+23,25,Impressive!,1
+48,27,Great job!,4
+13,38,Great job!,0
+9,38,Impressive!,3
+6,4,Great job!,4
+11,45,Well done!,5
+30,21,Well done!,5
+26,38,Well done!,0
+21,47,Nice work!,4
+30,35,Well done!,5
+47,37,Great job!,4
+17,33,Impressive!,1
+50,42,Keep it up!,0
+12,17,Impressive!,1
+23,49,Impressive!,0
+20,12,Great job!,5
+30,36,Well done!,3
+38,23,Impressive!,5
+30,39,Keep it up!,2
+48,17,Keep it up!,3
+5,6,Well done!,3
+15,45,Great job!,1
+16,2,Keep it up!,3
+40,24,Well done!,3
+41,2,Great job!,1
+50,15,Impressive!,1
+9,34,Great job!,1
+31,27,Keep it up!,3
+41,7,Keep it up!,0
+44,14,Great job!,3
+9,34,Impressive!,2
+15,1,Nice work!,3
+44,46,Great job!,2
+12,36,Nice work!,5
+31,47,Well done!,2
+35,32,Keep it up!,5
+9,24,Well done!,2
+47,22,Impressive!,4
+26,30,Great job!,0
+19,32,Well done!,0
+25,42,Keep it up!,0
+34,40,Keep it up!,2
+11,42,Great job!,2
+23,26,Impressive!,4
+7,26,Keep it up!,4
+47,11,Great job!,0
+15,37,Keep it up!,3
+40,25,Keep it up!,5
+38,43,Nice work!,4
+1,44,Well done!,1
+20,38,Nice work!,1
+1,28,Well done!,2
+7,7,Well done!,3
+21,30,Nice work!,5
+33,11,Keep it up!,5
+3,28,Keep it up!,2
+11,15,Well done!,3
+14,22,Great job!,1
+7,50,Great job!,0
+9,17,Impressive!,4
+26,8,Great job!,5
+42,40,Impressive!,5
+47,41,Nice work!,4
+26,12,Well done!,0
+14,41,Nice work!,2
+39,23,Great job!,0
+10,37,Keep it up!,2
+11,39,Well done!,1
+45,46,Nice work!,2
+10,9,Nice work!,4
+25,9,Keep it up!,3
+21,39,Impressive!,1
+25,34,Keep it up!,2
+16,5,Great job!,1
+32,15,Nice work!,4
+33,19,Nice work!,1
+24,48,Well done!,4
+5,9,Great job!,3
+35,9,Impressive!,3
+14,45,Great job!,0
+43,41,Keep it up!,5
+47,20,Keep it up!,5
+23,23,Great job!,0
+41,24,Great job!,2
+5,16,Well done!,5
+31,3,Impressive!,1
+41,19,Keep it up!,3
+39,22,Keep it up!,3
+19,19,Nice work!,4
+19,31,Well done!,3
+3,49,Great job!,5
+20,37,Great job!,5
+6,23,Nice work!,0
+38,19,Keep it up!,1
+3,30,Keep it up!,1
+8,21,Keep it up!,0
+13,38,Nice work!,3
+34,5,Impressive!,3
+50,10,Well done!,1
+15,8,Nice work!,3
+9,28,Well done!,3
+50,46,Great job!,1
+27,31,Well done!,4
+49,35,Great job!,0
